@@ -1,69 +1,66 @@
-export type SiteConfig = typeof siteConfig;
-
 export const siteConfig = {
-  name: "Next.js + HeroUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Gurlivleen Singh Kainth",
+  title: "Software Developer",
+  description:
+    "Portfolio of Gurlivleen Singh Kainth — Melbourne-based Software Developer experienced in full-stack web and mobile app development using Next.js, Flutter, Angular, Firebase, and Google Cloud. Explore innovative projects like Finlo Parking Management and Online Therapy Platform.",
+  url: "https://gurlivleen.dev",
+  author: "Gurlivleen Singh Kainth",
+  twitterHandle: "@gurlivleenkainth",
+  email: "gurlivleen.kainth2000@gmail.com",
+  location: "Melbourne, Victoria, Australia",
+  phone: "+61470554455",
+
   navItems: [
-    {
-      label: "Home",
-      href: "/",
-    },
-    {
-      label: "Docs",
-      href: "/docs",
-    },
-    {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "/about",
-    },
+    { label: "Home", href: "/" },
+    { label: "Projects", href: "/projects" },
+    { label: "About", href: "/about" },
+    { label: "Blog", href: "/blog" }, // optional
+    { label: "Contact", href: "/contact" },
   ],
+
   navMenuItems: [
-    {
-      label: "Profile",
-      href: "/profile",
-    },
-    {
-      label: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      label: "Projects",
-      href: "/projects",
-    },
-    {
-      label: "Team",
-      href: "/team",
-    },
-    {
-      label: "Calendar",
-      href: "/calendar",
-    },
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    {
-      label: "Help & Feedback",
-      href: "/help-feedback",
-    },
-    {
-      label: "Logout",
-      href: "/logout",
-    },
+    { label: "Resume", href: "/resume" },
+    { label: "Achievements", href: "/achievements" },
+    { label: "Skills", href: "/skills" },
+    { label: "Testimonials", href: "/testimonials" },
   ],
+
   links: {
-    github: "https://github.com/heroui-inc/heroui",
-    twitter: "https://twitter.com/hero_ui",
-    docs: "https://heroui.com",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
+    github: "https://github.com/gurlivleenkainth2000",
+    linkedin: "https://www.linkedin.com/in/gurlivleen2000/",
+    twitter: "https://twitter.com/gurlivleen2000",
+    portfolio: "https://gurlivleen.dev",
+    email: "mailto:gurlivleen.kainth2000@gmail.com",
+    discord: "https://discord.com/users/779623906448637953"
+  },
+
+  // Optional metadata defaults
+  meta: {
+    title: "Gurlivleen Singh Kainth | Software Developer Portfolio",
+    ogImage: "/og-home.jpg",
+    keywords: [
+      "Gurlivleen Singh Kainth",
+      "Software Developer",
+      "Full Stack Developer",
+      "Next.js",
+      "Flutter",
+      "Angular",
+      "Firebase",
+      "Google Cloud",
+      "Melbourne",
+      "Portfolio",
+    ],
+  },
+
+  // Optional footer content or social group
+  footer: {
+    text: "© 2025 Gurlivleen Singh Kainth. All rights reserved.",
+    socials: [
+      { label: "GitHub", href: "https://github.com/gurlivleenkainth2000" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/gurlivleen2000/" },
+      { label: "Twitter", href: "https://twitter.com/gurlivleenkainth" },
+    ],
   },
 };
+
+export type SiteConfig = typeof siteConfig;
