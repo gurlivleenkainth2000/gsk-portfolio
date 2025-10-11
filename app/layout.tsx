@@ -5,20 +5,13 @@ import clsx from "clsx";
 
 import { Providers } from "./providers";
 
-import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import { rootMetadata } from "@/config/root-metadata";
+import Script from "next/script";
+import Footer from "@/components/footer";
 
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+export const metadata: Metadata = { ...rootMetadata };
 
 export const viewport: Viewport = {
   themeColor: [
@@ -42,24 +35,17 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
+          <div className="relative flex flex-col">
             <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+            <main
+              className="flex-grow flex-shrink-0 basis-auto overflow-x-hidden"
+            >
               {children}
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
-              <Link
-                isExternal
-                className="flex items-center gap-1 text-current"
-                href="https://heroui.com?utm_source=next-app-template"
-                title="heroui.com homepage"
-              >
-                <span className="text-default-600">Powered by</span>
-                <p className="text-primary">HeroUI</p>
-              </Link>
-            </footer>
+            {/* <Footer /> */}
           </div>
         </Providers>
+        <Script src="https://platform.linkedin.com/badges/js/profile.js" />
       </body>
     </html>
   );
