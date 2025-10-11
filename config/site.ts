@@ -22,7 +22,6 @@ export const siteConfig = {
     { label: "Resume", href: "/resume" },
     { label: "Achievements", href: "/achievements" },
     { label: "Skills", href: "/skills" },
-    { label: "Testimonials", href: "/testimonials" },
   ],
 
   links: {
@@ -31,7 +30,8 @@ export const siteConfig = {
     twitter: "https://twitter.com/gurlivleen2000",
     portfolio: "https://gurlivleen.dev",
     email: "mailto:gurlivleen.kainth2000@gmail.com",
-    discord: "https://discord.com/users/779623906448637953"
+    discord: "https://discord.com/users/779623906448637953",
+    resume: "https://docs.google.com/document/d/e/2PACX-1vSzAndeHb1Z-evv3kbdhykzanvedNUZYvhfiT3w40Fw5Lcg9QdCe-Qnu2pnthWySFVJ5t9bElQX_Z_O/pub?embedded=true",
   },
 
   // Optional metadata defaults
