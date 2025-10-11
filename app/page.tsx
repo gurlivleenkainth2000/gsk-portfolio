@@ -23,14 +23,29 @@ export default function Home() {
   };
 
   return (
-    <section className="flex flex-col justify-center items-center min-h-[calc(100vh-4rem)] text-center px-6 sm:px-8 md:px-12 bg-gradient-to-b from-background to-background/80">
+    <section className="relative flex flex-col justify-center items-center min-h-[calc(100vh-4rem)] text-center overflow-hidden px-6 sm:px-8 md:px-12 bg-gradient-to-b from-background to-background/80">
+      {/* === BACKGROUND SHAPES === */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+      >
+        {/* Top-right soft circle */}
+        <div className="absolute top-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-gradient-to-tr from-primary/25 via-violet-500/10 to-transparent rounded-full blur-3xl" />
+
+        {/* Bottom-left soft blob */}
+        <div className="absolute bottom-[-15%] left-[-15%] w-[50vw] h-[50vw] bg-gradient-to-bl from-violet-500/25 via-primary/10 to-transparent rounded-full blur-3xl" />
+
+        {/* Center subtle glow */}
+        <div className="absolute inset-0 mx-auto my-auto w-[70vw] h-[70vw] bg-gradient-radial from-primary/5 via-transparent to-transparent blur-2xl" />
+      </div>
+
+      {/* === HERO CONTENT === */}
       <motion.div
         variants={container}
         initial="hidden"
         animate="visible"
-        className="max-w-3xl w-full flex flex-col items-center justify-center"
+        className="max-w-3xl w-full flex flex-col items-center justify-center relative z-10"
       >
-        {/* === Heading === */}
         <motion.h1
           variants={item}
           className={`${title()} text-4xl sm:text-5xl md:text-6xl font-bold leading-tight`}
@@ -47,7 +62,6 @@ export default function Home() {
           </span>
         </motion.h1>
 
-        {/* === Description === */}
         <motion.p
           variants={item}
           className="mt-6 md:mt-8 text-foreground/70 text-base md:text-lg leading-relaxed max-w-2xl"
@@ -62,7 +76,6 @@ export default function Home() {
           that merge technical excellence with collaborative leadership.
         </motion.p>
 
-        {/* === Location Line === */}
         <motion.p
           variants={item}
           className="mt-4 md:mt-6 text-foreground/60 text-sm md:text-base leading-relaxed"
@@ -76,7 +89,6 @@ export default function Home() {
           opportunities.
         </motion.p>
 
-        {/* === Buttons === */}
         <motion.div
           variants={item}
           className="flex flex-wrap justify-center gap-4 mt-8 md:mt-12"
