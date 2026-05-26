@@ -24,7 +24,6 @@ This file provides context for AI assistants (Claude, Copilot, etc.) working in 
 | Fonts | Inter (sans) + Fira Code (mono) via Google Fonts |
 | Linting | ESLint 9 flat config + Prettier |
 | Package Manager | npm (package-lock.json present) |
-| Deployment | Vercel (inferred from .gitignore) |
 
 ---
 
@@ -151,6 +150,6 @@ npm run lint      # runs: eslint --fix
 
 ## Git Branch Strategy
 
-- **`main`** — production branch, deployed to Vercel.
+- **`main`** — production branch.
 - Feature branches are created from `main` and merged via pull requests.
 - Commit messages are imperative, lower-case (e.g. `feat: add about section`).
