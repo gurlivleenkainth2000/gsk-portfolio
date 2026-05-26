@@ -1,15 +1,13 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@heroui/link";
 import clsx from "clsx";
+import Script from "next/script";
 
 import { Providers } from "./providers";
 
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { rootMetadata } from "@/config/root-metadata";
-import Script from "next/script";
-import Footer from "@/components/footer";
 
 export const metadata: Metadata = { ...rootMetadata };
 
@@ -37,9 +35,7 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col">
             <Navbar />
-            <main
-              className="flex-grow flex-shrink-0 basis-auto overflow-x-hidden"
-            >
+            <main className="flex-grow flex-shrink-0 basis-auto overflow-x-hidden">
               {children}
             </main>
             {/* <Footer /> */}

@@ -1,5 +1,6 @@
 // config/home-metadata.ts
 import type { Metadata } from "next";
+
 import { siteConfig } from "./site";
 import { homeKeywords } from "./keywords";
 

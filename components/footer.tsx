@@ -3,7 +3,9 @@
 import { Link } from "@heroui/link";
 import { Divider } from "@heroui/divider";
 import { Snippet } from "@heroui/snippet";
+
 import { DiscordIcon, GithubIcon, TwitterIcon } from "./icons";
+
 import { siteConfig } from "@/config/site";
 
 export default function Footer() {
@@ -21,21 +23,21 @@ export default function Footer() {
 
           <div className="mt-2 flex flex-col md:flex-row md:items-center gap-1 text-sm">
             <Snippet
-              size="sm"
-              variant="flat"
-              symbol=""
-              color="primary"
               className="bg-transparent text-foreground-400 hover:text-primary transition"
+              color="primary"
+              size="sm"
+              symbol=""
+              variant="flat"
             >
               <a href={`mailto:${email}`}>{email}</a>
             </Snippet>
 
             <Snippet
-              size="sm"
-              variant="flat"
-              symbol=""
-              color="primary"
               className="bg-transparent text-foreground-400 hover:text-primary transition"
+              color="primary"
+              size="sm"
+              symbol=""
+              variant="flat"
             >
               <a href={`tel:${phone}`}>{phone}</a>
             </Snippet>

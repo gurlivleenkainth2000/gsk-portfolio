@@ -1,15 +1,18 @@
 "use client";
 
+import type { Variants } from "framer-motion";
+
 import { Link } from "@heroui/link";
 import { button as buttonStyles } from "@heroui/theme";
 import { motion } from "framer-motion";
+import LinkedinIcon from "@mui/icons-material/LinkedIn";
+
 import { siteConfig } from "@/config/site";
 import { title } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
-import LinkedinIcon from "@mui/icons-material/LinkedIn";
 
 export default function Home() {
-  const container = {
+  const container: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -17,9 +20,13 @@ export default function Home() {
     },
   };
 
-  const item = {
+  const item: Variants = {
     hidden: { opacity: 0, y: 25 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   return (
@@ -41,14 +48,14 @@ export default function Home() {
 
       {/* === HERO CONTENT === */}
       <motion.div
-        variants={container}
-        initial="hidden"
         animate="visible"
         className="max-w-3xl w-full flex flex-col items-center justify-center relative z-10"
+        initial="hidden"
+        variants={container}
       >
         <motion.h1
-          variants={item}
           className={`${title()} text-4xl sm:text-5xl md:text-6xl font-bold leading-tight`}
+          variants={item}
         >
           Hi, I’m{" "}
           <span
@@ -63,26 +70,24 @@ export default function Home() {
         </motion.h1>
 
         <motion.p
-          variants={item}
           className="mt-6 md:mt-8 text-foreground/70 text-base md:text-lg leading-relaxed max-w-2xl"
+          variants={item}
         >
           I’m an adaptable{" "}
           <span className="text-primary font-semibold">Software Developer</span>{" "}
-          passionate about{" "}
-          <span className="font-semibold">Full-Stack</span> and{" "}
-          <span className="font-semibold">Backend Development</span>.{" "}
-          I craft{" "}
+          passionate about <span className="font-semibold">Full-Stack</span> and{" "}
+          <span className="font-semibold">Backend Development</span>. I craft{" "}
           <span className="text-primary">scalable, efficient solutions</span>{" "}
           that merge technical excellence with collaborative leadership.
         </motion.p>
 
         <motion.p
-          variants={item}
           className="mt-4 md:mt-6 text-foreground/60 text-sm md:text-base leading-relaxed"
+          variants={item}
         >
           Currently based in{" "}
-          <span className="text-primary font-medium">Melbourne, Australia</span>,
-          exploring{" "}
+          <span className="text-primary font-medium">Melbourne, Australia</span>
+          , exploring{" "}
           <span className="font-semibold text-primary">
             Full-Stack and Backend Developer
           </span>{" "}
@@ -90,8 +95,8 @@ export default function Home() {
         </motion.p>
 
         <motion.div
-          variants={item}
           className="flex flex-wrap justify-center gap-4 mt-8 md:mt-12"
+          variants={item}
         >
           <Link
             className={buttonStyles({
@@ -109,7 +114,7 @@ export default function Home() {
             className={buttonStyles({ variant: "bordered", radius: "full" })}
             href={siteConfig.links.linkedin}
           >
-            <LinkedinIcon fontSize="small" className="mr-1" /> LinkedIn
+            <LinkedinIcon className="mr-1" fontSize="small" /> LinkedIn
           </Link>
 
           <Link
@@ -117,7 +122,7 @@ export default function Home() {
             className={buttonStyles({ variant: "bordered", radius: "full" })}
             href={siteConfig.links.github}
           >
-            <GithubIcon size={18} className="mr-1" /> GitHub
+            <GithubIcon className="mr-1" size={18} /> GitHub
           </Link>
         </motion.div>
       </motion.div>
