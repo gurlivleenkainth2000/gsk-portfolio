@@ -2,8 +2,8 @@ import { title } from "@/components/primitives";
 
 export default function AboutPage() {
   return (
-    <div>
+    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 px-6 max-w-3xl mx-auto text-center">
       <h1 className={title()}>About</h1>
-    </div>
+    </section>
   );
 }
