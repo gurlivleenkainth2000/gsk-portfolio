@@ -7,6 +7,7 @@ import { Providers } from "./providers";
 
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import { AmbientBackground } from "@/components/page-background";
 import { rootMetadata } from "@/config/root-metadata";
 
 export const metadata: Metadata = { ...rootMetadata };
@@ -33,6 +34,8 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+          <AmbientBackground />
+
           <div className="relative flex flex-col">
             <Navbar />
             <main className="flex-grow flex-shrink-0 basis-auto overflow-x-hidden">

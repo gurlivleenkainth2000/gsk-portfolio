@@ -1,51 +1,23 @@
 "use client";
 
-import type { Variants } from "framer-motion";
-
 import { Link } from "@heroui/link";
 import { button as buttonStyles } from "@heroui/theme";
 import { motion } from "framer-motion";
+import NextLink from "next/link";
 import LinkedinIcon from "@mui/icons-material/LinkedIn";
 
 import { siteConfig } from "@/config/site";
 import { title } from "@/components/primitives";
+import { staggerContainerWith, fadeUpFrom } from "@/components/motion";
 import { GithubIcon } from "@/components/icons";
 
+// Hero uses slower, more deliberate timing than the site-wide default rhythm.
+const container = staggerContainerWith(0.3, 0.2);
+const item = fadeUpFrom(25, 0.8);
+
 export default function Home() {
-  const container: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.3, delayChildren: 0.2 },
-    },
-  };
-
-  const item: Variants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
-
   return (
-    <section className="relative flex flex-col justify-center items-center min-h-[calc(100vh-4rem)] text-center overflow-hidden px-6 sm:px-8 md:px-12 bg-gradient-to-b from-background to-background/80">
-      {/* === BACKGROUND SHAPES === */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 overflow-hidden pointer-events-none"
-      >
-        {/* Top-right soft circle */}
-        <div className="absolute top-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-gradient-to-tr from-primary/25 via-violet-500/10 to-transparent rounded-full blur-3xl" />
-
-        {/* Bottom-left soft blob */}
-        <div className="absolute bottom-[-15%] left-[-15%] w-[50vw] h-[50vw] bg-gradient-to-bl from-violet-500/25 via-primary/10 to-transparent rounded-full blur-3xl" />
-
-        {/* Center subtle glow */}
-        <div className="absolute inset-0 mx-auto my-auto w-[70vw] h-[70vw] bg-gradient-radial from-primary/5 via-transparent to-transparent blur-2xl" />
-      </div>
-
+    <section className="relative flex flex-col justify-center items-center min-h-[calc(100vh-4rem)] text-center overflow-hidden px-6 sm:px-8 md:px-12">
       {/* === HERO CONTENT === */}
       <motion.div
         animate="visible"
@@ -99,12 +71,13 @@ export default function Home() {
           variants={item}
         >
           <Link
+            as={NextLink}
             className={buttonStyles({
               color: "primary",
               radius: "full",
               variant: "shadow",
             })}
-            href="#projects"
+            href="/projects"
           >
             View My Projects
           </Link>

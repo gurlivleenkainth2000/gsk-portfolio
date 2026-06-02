@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 
 import { siteConfig } from "./site";
-import { homeKeywords } from "./keywords";
+
+import { homeKeywords } from "@/data/keywords";
 
 export const rootMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
