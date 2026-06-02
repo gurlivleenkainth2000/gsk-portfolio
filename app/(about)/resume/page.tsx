@@ -61,22 +61,6 @@ export default function ResumePage() {
             <OpenInNewIcon className="mr-1" fontSize="small" /> Open in new tab
           </Link>
         </motion.div>
-
-        <motion.p
-          className="mt-12 text-sm text-foreground/40 italic"
-          variants={fadeUp}
-        >
-          The published PDF is being finalised — links will become active once
-          it&apos;s in <code className="text-foreground/60">/public</code>.
-          Until then, request a copy via{" "}
-          <Link
-            className="text-primary hover:underline"
-            href="mailto:gurlivleen.kainth2000@gmail.com"
-          >
-            email
-          </Link>
-          .
-        </motion.p>
       </motion.section>
     </div>
   );

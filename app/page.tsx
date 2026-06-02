@@ -3,6 +3,7 @@
 import { Link } from "@heroui/link";
 import { button as buttonStyles } from "@heroui/theme";
 import { motion } from "framer-motion";
+import NextLink from "next/link";
 import LinkedinIcon from "@mui/icons-material/LinkedIn";
 
 import { siteConfig } from "@/config/site";
@@ -70,12 +71,13 @@ export default function Home() {
           variants={item}
         >
           <Link
+            as={NextLink}
             className={buttonStyles({
               color: "primary",
               radius: "full",
               variant: "shadow",
             })}
-            href="#projects"
+            href="/projects"
           >
             View My Projects
           </Link>

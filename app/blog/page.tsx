@@ -1,4 +1,9 @@
+import type { Metadata } from "next";
+
 import { title } from "@/components/primitives";
+import { blogMetadata } from "@/config/page-metadata";
+
+export const metadata: Metadata = blogMetadata;
 
 export default function BlogPage() {
   return (
