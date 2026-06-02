@@ -36,11 +36,9 @@ gsk-portfolio/
 │   ├── page.tsx            # Home page (hero section)
 │   ├── providers.tsx       # HeroUIProvider + NextThemesProvider
 │   ├── error.tsx           # Error boundary
-│   ├── about/              # Placeholder About page
+│   ├── about/              # About page (narrative + timeline + explore cards)
 │   ├── blog/               # Placeholder Blog page
-│   ├── docs/               # Placeholder Docs page
-│   ├── pricing/            # Placeholder Pricing page
-│   └── resume/             # Resume page (Google Docs iframe embed)
+│   └── projects/           # Placeholder Projects page
 ├── components/             # Shared React components
 │   ├── navbar.tsx          # Sticky responsive navigation bar
 │   ├── footer.tsx          # Footer (currently commented out in layout)
@@ -49,13 +47,18 @@ gsk-portfolio/
 │   ├── icons.tsx           # All SVG icon components
 │   ├── counter.tsx         # Example client component with useState
 │   └── linkedin-badge.tsx  # Dynamic-import LinkedIn badge (SSR disabled)
-├── config/
+├── config/                 # App configuration — tunable settings only
 │   ├── site.ts             # Single source of truth: name, links, nav items
 │   ├── fonts.ts            # Google Font definitions + CSS variables
-│   ├── keywords.ts         # SEO keyword array (170+ terms)
 │   └── root-metadata.ts    # OpenGraph, Twitter Card, robots metadata
-├── types/
-│   └── index.ts            # Shared TypeScript types (e.g. IconSvgProps)
+├── data/                   # Domain content records (arrays of entries)
+│   ├── experience.ts       # Work history entries
+│   ├── education.ts        # Education entries
+│   └── keywords.ts         # SEO keyword array (170+ terms)
+├── types/                  # TypeScript interfaces — one file per domain
+│   ├── index.ts            # Shared utility types (e.g. IconSvgProps)
+│   ├── experience.ts       # EmploymentType + ExperienceEntry
+│   └── education.ts        # EducationEntry
 ├── styles/
 │   └── globals.css         # Tailwind CSS entry point (@import "tailwindcss")
 ├── public/                 # Static assets, robots.txt, sitemap.xml
@@ -113,10 +116,20 @@ npm run lint      # runs: eslint --fix
 - Dark mode is class-based (`darkMode: "class"` in Tailwind config). Use `dark:` prefixes, never check `window.theme` manually.
 - **Emotion** is used internally by HeroUI; do not use it for custom components.
 
+### Configuration vs data — strict separation
+- `config/` is for **tunable app settings only** — site name, URL, fonts, OG metadata, nav route definitions. If it controls *how the app behaves*, it belongs here.
+- `data/` is for **domain content records** — arrays of entries that represent things in the world (jobs, courses, projects, SEO keywords). If it would naturally have a corresponding type in `types/`, it belongs here.
+- Test: would this still exist if the design changed? If yes → `data/`. If no → `config/`.
+
 ### Configuration as single source of truth
 - All personal info, navigation links, and social URLs live in `config/site.ts` (`siteConfig`).
 - Do **not** hardcode names, emails, or links in components — import from `siteConfig`.
-- SEO metadata is centralised in `config/root-metadata.ts` and `config/keywords.ts`.
+- SEO metadata is centralised in `config/root-metadata.ts`; the keyword array lives in `data/keywords.ts`.
+
+### Types
+- One file per domain: `types/experience.ts`, `types/education.ts`, etc.
+- `types/index.ts` is reserved for cross-cutting utility types (e.g. `IconSvgProps`).
+- Always import with `import type { ... } from "@/types/..."` to keep them erased at runtime.
 
 ### Animations
 - Use **Framer Motion** (`motion.div`, `variants`, `initial`/`animate`) for all entrance animations.
