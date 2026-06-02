@@ -38,3 +38,9 @@ pnpm-lock.yaml
 yarn.lock
 # package-lock.
 bun.lockb
+
+# local-only — not checked in
+CLAUDE.local.md
+claude.local.md
+history.md
+/docs/
