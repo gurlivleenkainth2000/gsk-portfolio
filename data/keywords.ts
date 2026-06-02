@@ -1,4 +1,4 @@
-// config/keywords.ts
+// data/keywords.ts
 export const homeKeywords: string[] = [
   // Personal identifiers
   "Gurlivleen",

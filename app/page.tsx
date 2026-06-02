@@ -1,7 +1,5 @@
 "use client";
 
-import type { Variants } from "framer-motion";
-
 import { Link } from "@heroui/link";
 import { button as buttonStyles } from "@heroui/theme";
 import { motion } from "framer-motion";
@@ -9,26 +7,14 @@ import LinkedinIcon from "@mui/icons-material/LinkedIn";
 
 import { siteConfig } from "@/config/site";
 import { title } from "@/components/primitives";
+import { staggerContainerWith, fadeUpFrom } from "@/components/motion";
 import { GithubIcon } from "@/components/icons";
 
+// Hero uses slower, more deliberate timing than the site-wide default rhythm.
+const container = staggerContainerWith(0.3, 0.2);
+const item = fadeUpFrom(25, 0.8);
+
 export default function Home() {
-  const container: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.3, delayChildren: 0.2 },
-    },
-  };
-
-  const item: Variants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
-
   return (
     <section className="relative flex flex-col justify-center items-center min-h-[calc(100vh-4rem)] text-center overflow-hidden px-6 sm:px-8 md:px-12">
       {/* === HERO CONTENT === */}
