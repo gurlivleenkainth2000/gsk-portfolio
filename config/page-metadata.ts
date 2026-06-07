@@ -12,6 +12,8 @@ import type { Metadata } from "next";
 
 import { siteConfig } from "./site";
 
+import { projectsKeywords } from "@/data/keywords";
+
 const baseUrl = siteConfig.url;
 
 const ogImage = (path = "/og-home.jpg") => `${baseUrl}${path}`;
@@ -87,6 +89,7 @@ export const blogMetadata: Metadata = {
 // ------------------------------------------------------------- /projects ----
 export const projectsMetadata: Metadata = {
   title: "Projects",
+  keywords: projectsKeywords,
   description:
     "Selected engineering projects by Gurlivleen Singh Kainth — enterprise integration platforms, AI-driven analytics products, multi-tenant SaaS, and a distributed Go automation system.",
   alternates: { canonical: `${baseUrl}/projects` },
