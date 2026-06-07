@@ -8,7 +8,7 @@ import { Providers } from "./providers";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { AmbientBackground } from "@/components/page-background";
-import { rootMetadata } from "@/config/metadata";
+import { rootMetadata } from "@/metadata";
 
 export const metadata: Metadata = { ...rootMetadata };
 

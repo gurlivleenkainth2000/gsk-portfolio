@@ -1,11 +1,24 @@
-// config/metadata/resume.ts
+// metadata/resume.ts
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage } from "./shared";
+import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
 
 import { siteConfig } from "@/config/site";
-import { resumeKeywords } from "@/data/keywords";
+
+export const resumeKeywords: string[] = dedupe(baseKeywords, [
+  "Resume",
+  "CV",
+  "Gurlivleen Singh Kainth Resume",
+  "Backend Engineer Resume",
+  "Full-Stack Engineer CV",
+  "Software Engineer Resume Melbourne",
+  "Download Resume",
+  "Enterprise Integration",
+  "Multi-tenant SaaS",
+  "Google Cloud",
+  "TypeScript",
+]);
 
 export const resumeMetadata: Metadata = {
   title: "Resume",
