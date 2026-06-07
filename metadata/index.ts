@@ -7,6 +7,7 @@
 //   - shared.ts        — baseUrl, ogImage, baseKeywords, dedupe
 //   - root.ts          — homeKeywords + rootMetadata (site-wide, app/layout.tsx)
 //   - about.ts         — aboutKeywords + aboutMetadata
+//   - contact.ts       — contactKeywords + contactMetadata
 //   - blog.ts          — blogKeywords + blogMetadata
 //   - projects.ts      — projectsKeywords + projectKeywords() + projectsMetadata
 //   - resume.ts        — resumeKeywords + resumeMetadata
@@ -20,6 +21,7 @@
 export { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
 export { homeKeywords, rootMetadata } from "./root";
 export { aboutKeywords, aboutMetadata } from "./about";
+export { contactKeywords, contactMetadata } from "./contact";
 export { blogKeywords, blogMetadata } from "./blog";
 export {
   projectsKeywords,
