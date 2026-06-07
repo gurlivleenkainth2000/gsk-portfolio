@@ -1,0 +1,32 @@
+# Firebase App Hosting configuration
+# https://firebase.google.com/docs/app-hosting/configure
+
+# Optional: runtime sizing. Defaults are fine for a portfolio; tune later.
+runConfig:
+  minInstances: 0
+  maxInstances: 2
+
+# Environment variables available to the running Next.js server.
+# - `secret:` pulls from Cloud Secret Manager (never commit the value).
+# - `value:`  is plain config, safe to commit.
+env:
+  # Resend API key — stored as a secret, NOT in this file.
+  # Create it once with:
+  #   firebase apphosting:secrets:set gsk-portfolio-resend-api-key
+  - variable: RESEND_API_KEY
+    secret: gsk-portfolio-resend-api-key
+    availability:
+      - RUNTIME
+
+  # Verified sender on gurlivleen.dev (set after the Resend domain is verified).
+  - variable: CONTACT_FROM_EMAIL
+    value: "Portfolio Contact <contact@gurlivleen.dev>"
+    availability:
+      - RUNTIME
+
+  # Where contact-form messages are delivered. Routed to Gmail via Cloudflare
+  # Email Routing, so the personal inbox stays out of the repo.
+  - variable: CONTACT_TO_EMAIL
+    value: contact@gurlivleen.dev
+    availability:
+      - RUNTIME

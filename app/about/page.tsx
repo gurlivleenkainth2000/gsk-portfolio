@@ -5,10 +5,6 @@ import { Divider } from "@heroui/divider";
 import { Link } from "@heroui/link";
 import { button as buttonStyles } from "@heroui/theme";
 import NextLink from "next/link";
-import LinkedinIcon from "@mui/icons-material/LinkedIn";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import ExploreIcon from "@mui/icons-material/Explore";
-import RouteIcon from "@mui/icons-material/Route";
 
 import { siteConfig } from "@/config/site";
 import { title } from "@/components/primitives";
@@ -24,7 +20,13 @@ import { ExperienceTimeline } from "@/components/timeline/experience-timeline";
 import { EducationTimeline } from "@/components/timeline/education-timeline";
 import { experience } from "@/data/experience";
 import { education } from "@/data/education";
-import { GithubIcon } from "@/components/icons";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  LocationOnIcon,
+  ExploreIcon,
+  RouteIcon,
+} from "@/components/icons";
 
 export default function AboutPage() {
   return (
@@ -92,7 +94,7 @@ export default function AboutPage() {
             })}
             href={siteConfig.links.linkedin}
           >
-            <LinkedinIcon className="mr-1" fontSize="small" /> LinkedIn
+            <LinkedinIcon className="mr-1" size={16} /> LinkedIn
           </Link>
           <Link
             isExternal

@@ -8,7 +8,7 @@ import { Providers } from "./providers";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { AmbientBackground } from "@/components/page-background";
-import { rootMetadata } from "@/config/root-metadata";
+import { rootMetadata, personSchema } from "@/metadata";
 
 export const metadata: Metadata = { ...rootMetadata };
 
@@ -26,7 +26,12 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <head />
+      <head>
+        <script
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+          type="application/ld+json"
+        />
+      </head>
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
