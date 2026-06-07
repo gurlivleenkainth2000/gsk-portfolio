@@ -14,12 +14,12 @@ export const siteConfig = {
     { label: "Home", href: "/" },
     { label: "Projects", href: "/projects" },
     { label: "About", href: "/about" },
+    { label: "Resume", href: "/resume" },
     // { label: "Blog", href: "/blog" }, // temporarily hidden — stub page
     { label: "Contact", href: "/contact" },
   ],
 
   navMenuItems: [
-    { label: "Resume", href: "/resume" },
     { label: "Achievements", href: "/achievements" },
     { label: "Skills", href: "/skills" },
   ],
