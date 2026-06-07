@@ -233,7 +233,10 @@ export const rootMetadata: Metadata = {
     },
   },
   verification: {
-    google: "YOUR_GOOGLE_SITE_VERIFICATION_TOKEN",
+    // Set GOOGLE_SITE_VERIFICATION in the environment (e.g. .env.local or the
+    // host's env). When unset, Next.js omits the tag rather than shipping a
+    // bogus placeholder.
+    google: process.env.GOOGLE_SITE_VERIFICATION,
   },
   category: "Software Development",
   classification: "Professional Portfolio",
