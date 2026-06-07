@@ -9,6 +9,7 @@
 import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/config/site";
+import { projects } from "@/data/projects";
 
 type Route = {
   path: string;
@@ -24,6 +25,11 @@ const routes: Route[] = [
   { path: "/resume", changeFrequency: "yearly", priority: 0.7 },
   { path: "/skills", changeFrequency: "monthly", priority: 0.6 },
   { path: "/achievements", changeFrequency: "monthly", priority: 0.6 },
+  ...projects.map((p) => ({
+    path: `/projects/${p.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  })),
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
