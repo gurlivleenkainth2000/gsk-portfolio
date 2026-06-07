@@ -5,9 +5,9 @@ import type { ExperienceEntry, EmploymentType } from "@/types/experience";
 import { motion } from "framer-motion";
 import { Chip } from "@heroui/chip";
 import { Link } from "@heroui/link";
-import WorkIcon from "@mui/icons-material/Work";
 
 import { title } from "@/components/primitives";
+import { WorkIcon } from "@/components/icons";
 import { fadeUp } from "@/components/motion";
 import { TimelineShell } from "@/components/timeline/shell";
 import { TimelineEntry } from "@/components/timeline/entry";

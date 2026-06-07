@@ -9,15 +9,17 @@ import { Input, Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
 import { Divider } from "@heroui/divider";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import EmailIcon from "@mui/icons-material/Email";
-import LinkedinIcon from "@mui/icons-material/LinkedIn";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { staggerContainer, fadeUp } from "@/components/motion";
-import { GithubIcon } from "@/components/icons";
+import {
+  GithubIcon,
+  LocationOnIcon,
+  EmailIcon,
+  LinkedinIcon,
+  CheckCircleIcon,
+} from "@/components/icons";
 
 // Simple RFC-5322-ish email check — good enough for client-side UX.
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

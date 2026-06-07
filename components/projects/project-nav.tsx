@@ -1,9 +1,7 @@
 import type { ProjectEntry } from "@/types/project";
 
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
 import { ExploreCard } from "@/components/explore-card/card";
+import { ArrowBackIcon, ArrowForwardIcon } from "@/components/icons";
 
 /**
  * Previous / next navigation between project detail pages. Composes the shared

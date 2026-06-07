@@ -3,11 +3,10 @@
 import { motion } from "framer-motion";
 import { Link } from "@heroui/link";
 import { button as buttonStyles } from "@heroui/theme";
-import DownloadIcon from "@mui/icons-material/Download";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 import { title } from "@/components/primitives";
 import { staggerContainer, fadeUp } from "@/components/motion";
+import { DownloadIcon, OpenInNewIcon } from "@/components/icons";
 
 // TODO: Replace with the published resume URL.
 // Options: a PDF at /resume.pdf in /public, a published Google Doc, or both.

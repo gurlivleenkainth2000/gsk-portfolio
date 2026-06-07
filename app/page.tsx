@@ -4,12 +4,11 @@ import { Link } from "@heroui/link";
 import { button as buttonStyles } from "@heroui/theme";
 import { motion } from "framer-motion";
 import NextLink from "next/link";
-import LinkedinIcon from "@mui/icons-material/LinkedIn";
 
 import { siteConfig } from "@/config/site";
 import { title } from "@/components/primitives";
 import { staggerContainerWith, fadeUpFrom } from "@/components/motion";
-import { GithubIcon } from "@/components/icons";
+import { GithubIcon, LinkedinIcon } from "@/components/icons";
 
 // Hero uses slower, more deliberate timing than the site-wide default rhythm.
 const container = staggerContainerWith(0.3, 0.2);
