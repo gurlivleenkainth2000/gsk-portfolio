@@ -80,6 +80,6 @@ export const linkedinCard: ExploreCardItem = {
   label: "LinkedIn",
   href: siteConfig.links.linkedin,
   description: "Career timeline, endorsements, and professional network.",
-  icon: <LinkedinIcon fontSize="small" />,
+  icon: <LinkedinIcon size={18} />,
   external: true,
 };

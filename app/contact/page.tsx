@@ -266,7 +266,7 @@ export default function ContactPage() {
             className="flex items-center gap-1 text-foreground/60 hover:text-primary transition-colors text-sm"
             href={siteConfig.links.linkedin}
           >
-            <LinkedinIcon fontSize="small" /> LinkedIn
+            <LinkedinIcon size={16} /> LinkedIn
           </Link>
         </motion.div>
         <motion.div variants={fadeUp}>

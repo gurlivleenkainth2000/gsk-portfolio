@@ -14,7 +14,7 @@ export const siteConfig = {
     { label: "Home", href: "/" },
     { label: "Projects", href: "/projects" },
     { label: "About", href: "/about" },
-    { label: "Blog", href: "/blog" }, // optional
+    // { label: "Blog", href: "/blog" }, // temporarily hidden — stub page
     { label: "Contact", href: "/contact" },
   ],
 
