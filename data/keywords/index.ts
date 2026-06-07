@@ -4,13 +4,20 @@
 // a specific module (e.g. "@/data/keywords/projects") — both resolve here.
 //
 // One file per concern:
-//   - shared.ts   — baseKeywords + dedupe (reused by every route)
-//   - home.ts     — homeKeywords (site root, inherited by un-overridden routes)
-//   - projects.ts — projectsKeywords + projectKeywords (index + [slug])
-//
-// Future routes (about, blog, resume, skills, achievements) get their own
-// files here and are re-exported below.
+//   - shared.ts       — baseKeywords + dedupe (reused by every route)
+//   - home.ts         — homeKeywords (site root, inherited by un-overridden routes)
+//   - projects.ts     — projectsKeywords + projectKeywords (index + [slug])
+//   - about.ts        — aboutKeywords
+//   - blog.ts         — blogKeywords
+//   - resume.ts       — resumeKeywords
+//   - skills.ts       — skillsKeywords
+//   - achievements.ts — achievementsKeywords
 
 export { baseKeywords, dedupe } from "./shared";
 export { homeKeywords } from "./home";
 export { projectsKeywords, projectKeywords } from "./projects";
+export { aboutKeywords } from "./about";
+export { blogKeywords } from "./blog";
+export { resumeKeywords } from "./resume";
+export { skillsKeywords } from "./skills";
+export { achievementsKeywords } from "./achievements";
