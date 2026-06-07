@@ -26,7 +26,6 @@ export { default as ExploreIcon } from "@mui/icons-material/Explore";
 export { default as FiberManualRecordIcon } from "@mui/icons-material/FiberManualRecord";
 export { default as GroupsIcon } from "@mui/icons-material/Groups";
 export { default as LanguageIcon } from "@mui/icons-material/Language";
-export { default as LinkedinIcon } from "@mui/icons-material/LinkedIn";
 export { default as LocationOnIcon } from "@mui/icons-material/LocationOn";
 export { default as LockIcon } from "@mui/icons-material/Lock";
 export { default as OpenInNewIcon } from "@mui/icons-material/OpenInNew";

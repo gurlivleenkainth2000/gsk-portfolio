@@ -94,7 +94,7 @@ export default function AboutPage() {
             })}
             href={siteConfig.links.linkedin}
           >
-            <LinkedinIcon className="mr-1" fontSize="small" /> LinkedIn
+            <LinkedinIcon className="mr-1" size={16} /> LinkedIn
           </Link>
           <Link
             isExternal
