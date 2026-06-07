@@ -21,10 +21,11 @@ const routes: Route[] = [
   { path: "/", changeFrequency: "weekly", priority: 1.0 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
   { path: "/projects", changeFrequency: "weekly", priority: 0.9 },
-  { path: "/blog", changeFrequency: "monthly", priority: 0.6 },
+  // { path: "/blog", changeFrequency: "monthly", priority: 0.6 }, // hidden until the page has real content
   { path: "/resume", changeFrequency: "yearly", priority: 0.7 },
   { path: "/skills", changeFrequency: "monthly", priority: 0.6 },
   { path: "/achievements", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/contact", changeFrequency: "yearly", priority: 0.5 },
   ...projects.map((p) => ({
     path: `/projects/${p.slug}`,
     changeFrequency: "monthly" as const,
