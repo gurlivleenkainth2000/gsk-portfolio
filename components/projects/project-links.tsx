@@ -3,13 +3,15 @@ import type { ReactNode } from "react";
 
 import { Link } from "@heroui/link";
 import { Chip } from "@heroui/chip";
-import LanguageIcon from "@mui/icons-material/Language";
-import AndroidIcon from "@mui/icons-material/Android";
-import AppleIcon from "@mui/icons-material/Apple";
-import DescriptionIcon from "@mui/icons-material/Description";
-import LockIcon from "@mui/icons-material/Lock";
 
-import { GithubIcon } from "@/components/icons";
+import {
+  GithubIcon,
+  LanguageIcon,
+  AndroidIcon,
+  AppleIcon,
+  DescriptionIcon,
+  LockIcon,
+} from "@/components/icons";
 
 const ICONS: Record<ProjectLinkType, ReactNode> = {
   website: <LanguageIcon style={{ fontSize: 16 }} />,

@@ -3,9 +3,9 @@
 import type { ReactNode } from "react";
 
 import { motion } from "framer-motion";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 import { fadeUp } from "@/components/motion";
+import { FiberManualRecordIcon } from "@/components/icons";
 
 interface TimelineEntryProps {
   /** When true, the dot uses the primary color to signal "current". */
