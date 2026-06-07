@@ -2,10 +2,10 @@ import type { ProjectLink, ProjectLinkType } from "@/types/project";
 import type { ReactNode } from "react";
 
 import { Link } from "@heroui/link";
-import { Chip } from "@heroui/chip";
 
 import {
   GithubIcon,
+  LinkedinIcon,
   LanguageIcon,
   AndroidIcon,
   AppleIcon,
@@ -19,12 +19,18 @@ const ICONS: Record<ProjectLinkType, ReactNode> = {
   appStore: <AppleIcon style={{ fontSize: 16 }} />,
   github: <GithubIcon size={15} />,
   caseStudy: <DescriptionIcon style={{ fontSize: 16 }} />,
+  linkedin: <LinkedinIcon size={15} />,
 };
 
+/** Shared pill styling so links and the source note read as one consistent set. */
+export const PILL_CLASS =
+  "inline-flex items-center gap-1.5 rounded-full bg-default-100 px-3 py-1 text-sm text-foreground/80";
+
 /**
- * Renders a project's external links as flat pills that sit alongside the tech
- * chips. Links flagged `private` render as a muted lock chip instead of a link,
- * so we never show a fake or broken URL.
+ * Renders a project's external links as flat rounded pills. Links flagged
+ * `private` render as a muted lock pill instead of a link, so we never show a
+ * fake or broken URL. The same `PILL_CLASS` is reused for the source-note pill
+ * in the hero, so the whole "links & status" row is one consistent style.
  */
 export function ProjectLinks({ links }: { links: ProjectLink[] }) {
   if (links.length === 0) return null;
@@ -34,14 +40,10 @@ export function ProjectLinks({ links }: { links: ProjectLink[] }) {
       {links.map((link) => {
         if (link.private || !link.url) {
           return (
-            <Chip
-              key={link.label}
-              size="sm"
-              startContent={<LockIcon style={{ fontSize: 13 }} />}
-              variant="flat"
-            >
+            <span key={link.label} className={PILL_CLASS}>
+              <LockIcon style={{ fontSize: 14 }} />
               {link.label} (private)
-            </Chip>
+            </span>
           );
         }
 
@@ -49,7 +51,7 @@ export function ProjectLinks({ links }: { links: ProjectLink[] }) {
           <Link
             key={link.label}
             isExternal
-            className="inline-flex items-center gap-1.5 rounded-full bg-default-100 px-3 py-1 text-sm text-foreground/80 transition-colors hover:bg-default-200 hover:text-primary"
+            className={`${PILL_CLASS} transition-colors hover:bg-default-200 hover:text-primary`}
             href={link.url}
           >
             {ICONS[link.type]}

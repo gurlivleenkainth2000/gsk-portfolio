@@ -40,9 +40,11 @@ export function ExploreCard({
             <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
               {label}
             </p>
-            <p className="text-sm text-foreground/55 leading-relaxed">
-              {description}
-            </p>
+            {description && (
+              <p className="text-sm text-foreground/55 leading-relaxed">
+                {description}
+              </p>
+            )}
           </div>
         </div>
         {trailingIcon && (

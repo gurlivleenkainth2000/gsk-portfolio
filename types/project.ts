@@ -10,7 +10,8 @@ export type ProjectLinkType =
   | "appStore"
   | "playStore"
   | "github"
-  | "caseStudy";
+  | "caseStudy"
+  | "linkedin";
 
 export interface ProjectLink {
   type: ProjectLinkType;
@@ -19,6 +20,8 @@ export interface ProjectLink {
   url?: string;
   /** When true, render a "private — client" badge instead of a link. */
   private?: boolean;
+  /** One-line pitch shown under the label in the "External links" card list. */
+  description?: string;
 }
 
 /** A single engineering challenge, written as narrative (not labelled STAR). */
@@ -43,6 +46,19 @@ export interface ProjectArchitecture {
 export interface ProjectCompany {
   name: string;
   url?: string;
+}
+
+/**
+ * A showcase image (e.g. an exhibition poster or demo photo). Rendered in the
+ * "Showcase" section via `next/image`; width/height are the intrinsic pixel
+ * dimensions of the asset so Next can reserve layout space and optimise.
+ */
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
 }
 
 export interface ProjectEntry {
@@ -76,6 +92,10 @@ export interface ProjectEntry {
   /** Honest "what I owned vs the team" line. */
   attribution: string;
   architecture?: ProjectArchitecture;
+  /** Optional featured showcase image (e.g. an exhibition poster). */
+  poster?: ProjectImage;
+  /** Optional supporting photos shown as a grid beneath the poster. */
+  gallery?: ProjectImage[];
   /** 2–3 entries by what is genuinely defensible. */
   challenges: ProjectChallenge[];
   /** 1–2 honest "what I'd do differently" notes. */
