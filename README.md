@@ -136,5 +136,6 @@ fork/clone checklist and custom-domain setup — is in
 
 ## License
 
-Personal project. The code may be referenced for learning; the written content,
-project case studies, and branding are © Gurlivleen Singh Kainth.
+The source code is released under the [MIT License](./LICENSE). The written
+content, project case studies, brand assets, and résumé are © Gurlivleen Singh
+Kainth and are not covered by MIT (see [NOTICE](./NOTICE)).
