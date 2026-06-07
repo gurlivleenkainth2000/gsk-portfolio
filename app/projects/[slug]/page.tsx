@@ -4,8 +4,9 @@ import { notFound } from "next/navigation";
 
 import { siteConfig } from "@/config/site";
 import { projects, getProjectBySlug } from "@/data/projects";
-import { projectKeywords } from "@/metadata";
+import { projectKeywords, projectSchema, breadcrumbSchema } from "@/metadata";
 import { ProjectDetail } from "@/components/projects/project-detail";
+import { JsonLd } from "@/components/json-ld";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -64,5 +65,19 @@ export default async function ProjectDetailPage({ params }: Params) {
   const prev = idx > 0 ? projects[idx - 1] : undefined;
   const next = idx < projects.length - 1 ? projects[idx + 1] : undefined;
 
-  return <ProjectDetail next={next} prev={prev} project={project} />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          projectSchema(project),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Projects", path: "/projects" },
+            { name: project.name, path: `/projects/${project.slug}` },
+          ]),
+        ]}
+      />
+      <ProjectDetail next={next} prev={prev} project={project} />
+    </>
+  );
 }
