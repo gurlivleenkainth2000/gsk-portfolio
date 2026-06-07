@@ -232,12 +232,9 @@ export const rootMetadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  verification: {
-    // Set GOOGLE_SITE_VERIFICATION in the environment (e.g. .env.local or the
-    // host's env). When unset, Next.js omits the tag rather than shipping a
-    // bogus placeholder.
-    google: process.env.GOOGLE_SITE_VERIFICATION,
-  },
+  // No `verification` field: gurlivleen.dev is verified in Google Search
+  // Console as a Domain property via a DNS TXT record, so a meta tag is
+  // redundant.
   category: "Software Development",
   classification: "Professional Portfolio",
 };
