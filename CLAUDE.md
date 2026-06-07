@@ -49,12 +49,18 @@ gsk-portfolio/
 │   └── linkedin-badge.tsx  # Dynamic-import LinkedIn badge (SSR disabled)
 ├── config/                 # App configuration — tunable settings only
 │   ├── site.ts             # Single source of truth: name, links, nav items
-│   ├── fonts.ts            # Google Font definitions + CSS variables
-│   └── root-metadata.ts    # OpenGraph, Twitter Card, robots metadata
+│   └── fonts.ts            # Google Font definitions + CSS variables
 ├── data/                   # Domain content records (arrays of entries)
 │   ├── experience.ts       # Work history entries
 │   ├── education.ts        # Education entries
-│   └── keywords.ts         # SEO keyword array (170+ terms)
+│   ├── projects.ts         # Project entries (incl. per-project SEO keywords)
+│   └── skills.ts           # Skill entries
+├── metadata/               # Per-route SEO — keywords + Next.js Metadata, one file per route
+│   ├── shared.ts           # baseUrl, ogImage(), baseKeywords, dedupe()
+│   ├── root.ts             # homeKeywords + rootMetadata (site-wide defaults)
+│   ├── projects.ts         # projectsKeywords + projectKeywords() + projectsMetadata
+│   ├── about.ts … etc.     # <route>Keywords + <route>Metadata (blog, resume, skills, achievements)
+│   └── index.ts            # Barrel — import from "@/metadata"
 ├── types/                  # TypeScript interfaces — one file per domain
 │   ├── index.ts            # Shared utility types (e.g. IconSvgProps)
 │   ├── experience.ts       # EmploymentType + ExperienceEntry
@@ -116,15 +122,17 @@ npm run lint      # runs: eslint --fix
 - Dark mode is class-based (`darkMode: "class"` in Tailwind config). Use `dark:` prefixes, never check `window.theme` manually.
 - **Emotion** is used internally by HeroUI; do not use it for custom components.
 
-### Configuration vs data — strict separation
-- `config/` is for **tunable app settings only** — site name, URL, fonts, OG metadata, nav route definitions. If it controls *how the app behaves*, it belongs here.
-- `data/` is for **domain content records** — arrays of entries that represent things in the world (jobs, courses, projects, SEO keywords). If it would naturally have a corresponding type in `types/`, it belongs here.
-- Test: would this still exist if the design changed? If yes → `data/`. If no → `config/`.
+### Configuration vs data vs metadata — separation
+- `config/` is for **tunable app settings only** — site name, URL, fonts, nav route definitions. If it controls *how the app behaves*, it belongs here.
+- `data/` is for **domain content records** — arrays of entries that represent things in the world (jobs, courses, projects, skills). If it would naturally have a corresponding type in `types/`, it belongs here.
+- `metadata/` is for **per-route SEO** — each route's keyword list and Next.js `Metadata` object, co-located one file per route and imported via `@/metadata`. Per-project keyword *content* stays on each `ProjectEntry` in `data/projects.ts` and is combined by `projectKeywords()` in `metadata/projects.ts`.
+- Test: would this still exist if the design changed? If yes → `data/`. If no → `config/` (or `metadata/` for search / social presentation).
+- Note: `sitemap.ts` and `robots.ts` are Next.js file-convention routes and live in `app/`, not in `metadata/`.
 
 ### Configuration as single source of truth
 - All personal info, navigation links, and social URLs live in `config/site.ts` (`siteConfig`).
 - Do **not** hardcode names, emails, or links in components — import from `siteConfig`.
-- SEO metadata is centralised in `config/root-metadata.ts`; the keyword array lives in `data/keywords.ts`.
+- SEO keywords + `Metadata` live in `metadata/` (one file per route; site-wide defaults in `metadata/root.ts`), imported via `@/metadata`. Each file exports both the route's keyword array and its `Metadata` object.
 
 ### Types
 - One file per domain: `types/experience.ts`, `types/education.ts`, etc.

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { projectsMetadata } from "@/config/page-metadata";
+import { projectsMetadata } from "@/metadata";
 import { title, subtitle } from "@/components/primitives";
 import { projects } from "@/data/projects";
 import { ProjectsGrid } from "@/components/projects/projects-grid";
