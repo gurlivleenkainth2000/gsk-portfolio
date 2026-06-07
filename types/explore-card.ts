@@ -13,6 +13,11 @@ export interface ExploreCardItem {
   description: string;
   /** Optional leading icon — pass a rendered node, e.g. `icon: <WorkIcon />`. */
   icon?: ReactNode;
+  /**
+   * Trailing affordance icon. Defaults to an outward arrow. Pass a directional
+   * icon (e.g. back/forward) for navigation, or `null` to hide it.
+   */
+  trailingIcon?: ReactNode;
   /** If true, opens in a new tab with rel="noopener noreferrer". Defaults to false. */
   external?: boolean;
 }
