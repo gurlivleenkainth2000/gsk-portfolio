@@ -10,7 +10,8 @@ import NextLink from "next/link";
 
 import { title } from "@/components/primitives";
 import { staggerContainer, fadeUp } from "@/components/motion";
-import { ProjectLinks } from "@/components/projects/project-links";
+import { ProjectLinks, PILL_CLASS } from "@/components/projects/project-links";
+import { ProjectExternalLinks } from "@/components/projects/project-external-links";
 import {
   ArrowBackIcon,
   LockIcon,
@@ -22,6 +23,7 @@ import {
 } from "@/components/icons";
 import { ChallengeBlock } from "@/components/projects/challenge-block";
 import { ArchitectureFigure } from "@/components/projects/architecture-figure";
+import { PosterFigure } from "@/components/projects/poster-figure";
 import { ProjectNav } from "@/components/projects/project-nav";
 
 const statusColor = {
@@ -60,6 +62,15 @@ export function ProjectDetail({
   prev?: ProjectEntry;
   next?: ProjectEntry;
 }) {
+  // Live sites stay in the hero as pills; posts / repos / other pages go in
+  // their own "External links" section after the challenges.
+  const websiteLinks = project.links.filter(
+    (l) => l.type === "website" && l.url && !l.private,
+  );
+  const externalLinks = project.links.filter(
+    (l) => l.type !== "website" && l.url && !l.private,
+  );
+
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-16 px-6 py-16">
       {/* ============== HERO ============== */}
@@ -105,7 +116,7 @@ export function ProjectDetail({
         </motion.div>
 
         <motion.p
-          className="mt-4 max-w-2xl text-base text-foreground/70 md:text-lg"
+          className="mt-4 text-base text-foreground/70 md:text-lg"
           variants={fadeUp}
         >
           {project.subtitle}
@@ -153,19 +164,23 @@ export function ProjectDetail({
           ))}
         </motion.div>
 
-        {project.links.length > 0 ? (
-          <motion.div className="mt-5" variants={fadeUp}>
-            <ProjectLinks links={project.links} />
-          </motion.div>
-        ) : (
-          <motion.div className="mt-5" variants={fadeUp}>
-            <Chip
-              size="sm"
-              startContent={<LockIcon style={{ fontSize: 13 }} />}
-              variant="flat"
-            >
-              {privateSourceNote[project.category]}
-            </Chip>
+        {/* Links & status — the live site(s) and, when there's no public repo,
+            a note that the source is intentionally private (NDA / private org).
+            Grouped on one row so the website pill isn't sandwiched between two
+            otherwise-identical chip rows. */}
+        {(websiteLinks.length > 0 ||
+          !project.links.some((l) => l.type === "github" && l.url)) && (
+          <motion.div
+            className="mt-6 flex flex-wrap items-center gap-2"
+            variants={fadeUp}
+          >
+            {websiteLinks.length > 0 && <ProjectLinks links={websiteLinks} />}
+            {!project.links.some((l) => l.type === "github" && l.url) && (
+              <span className={PILL_CLASS}>
+                <LockIcon style={{ fontSize: 14 }} />
+                {privateSourceNote[project.category]}
+              </span>
+            )}
           </motion.div>
         )}
       </motion.section>
@@ -183,13 +198,13 @@ export function ProjectDetail({
           Overview
         </motion.h2>
         <motion.p
-          className="mt-4 max-w-2xl leading-relaxed text-foreground/70"
+          className="mt-4 leading-relaxed text-foreground/70"
           variants={fadeUp}
         >
           {project.overview}
         </motion.p>
         <motion.p
-          className="mt-3 max-w-2xl text-sm italic leading-relaxed text-foreground/50"
+          className="mt-3 text-sm italic leading-relaxed text-foreground/50"
           variants={fadeUp}
         >
           {project.attribution}
@@ -211,6 +226,26 @@ export function ProjectDetail({
             </motion.h2>
             <motion.div className="mt-6" variants={fadeUp}>
               <ArchitectureFigure architecture={project.architecture} />
+            </motion.div>
+          </motion.section>
+        </>
+      )}
+
+      {/* ============== SHOWCASE ============== */}
+      {(project.poster || (project.gallery && project.gallery.length > 0)) && (
+        <>
+          <Divider />
+          <motion.section
+            initial="hidden"
+            variants={staggerContainer}
+            viewport={{ once: true, amount: 0.2 }}
+            whileInView="visible"
+          >
+            <motion.h2 className={title({ size: "sm" })} variants={fadeUp}>
+              Showcase
+            </motion.h2>
+            <motion.div className="mt-6" variants={fadeUp}>
+              <PosterFigure gallery={project.gallery} poster={project.poster} />
             </motion.div>
           </motion.section>
         </>
@@ -240,6 +275,26 @@ export function ProjectDetail({
         </>
       )}
 
+      {/* ============== EXTERNAL LINKS ============== */}
+      {externalLinks.length > 0 && (
+        <>
+          <Divider />
+          <motion.section
+            initial="hidden"
+            variants={staggerContainer}
+            viewport={{ once: true, amount: 0.2 }}
+            whileInView="visible"
+          >
+            <motion.h2 className={title({ size: "sm" })} variants={fadeUp}>
+              External links
+            </motion.h2>
+            <div className="mt-6">
+              <ProjectExternalLinks links={externalLinks} />
+            </div>
+          </motion.section>
+        </>
+      )}
+
       {/* ============== REFLECTIONS ============== */}
       {project.reflections.length > 0 && (
         <>
@@ -253,7 +308,7 @@ export function ProjectDetail({
             <motion.h2 className={title({ size: "sm" })} variants={fadeUp}>
               What I&apos;d do differently
             </motion.h2>
-            <ul className="mt-4 flex max-w-2xl list-disc flex-col gap-2 pl-5 leading-relaxed text-foreground/70">
+            <ul className="mt-4 flex list-disc flex-col gap-2 pl-5 leading-relaxed text-foreground/70">
               {project.reflections.map((r) => (
                 <motion.li key={r} variants={fadeUp}>
                   {r}
