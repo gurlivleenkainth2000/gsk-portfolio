@@ -1,53 +1,113 @@
-# Next.js & HeroUI Template
+# gsk-portfolio
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+Personal portfolio of **Gurlivleen Singh Kainth** — a Melbourne-based backend /
+full-stack software engineer. Built with Next.js (App Router) and HeroUI, and
+deployed on Firebase App Hosting.
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
+**Live:** [gurlivleen.dev](https://gurlivleen.dev)
 
-## Technologies Used
+---
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI v2](https://heroui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+## Tech stack
 
-## How to Use
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Language | TypeScript 5 (strict) |
+| UI | HeroUI v2 + Tailwind CSS 4 + Tailwind Variants |
+| Animation | Framer Motion |
+| Theming | next-themes (class-based light / dark) |
+| Email | Resend (contact form delivery) |
+| Forms | react-hook-form |
+| Hosting | Firebase App Hosting |
+| DNS / email routing | Cloudflare |
 
-### Use the template with create-next-app
+---
 
-To create a new project based on this template using `create-next-app`, run the following command:
+## Features
+
+- **Home, About, Projects** (with per-project detail pages), and an `(about)`
+  route group for **Resume, Skills, Achievements**.
+- **Contact form** (`/contact`) with client-side validation, a hidden honeypot,
+  and server-side delivery via Resend (see [CONTACT.md](./CONTACT.md)).
+- **Per-route SEO** — every route owns its keywords + Next.js `Metadata`, plus
+  `sitemap.ts`, `robots.ts`, and schema.org `Person` JSON-LD.
+- Light / dark theming, responsive navbar, and Framer Motion entrance
+  animations throughout.
+
+---
+
+## Getting started
 
 ```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
-```
-
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
+# 1. install
 npm install
+
+# 2. configure env (contact form)
+cp .env.example .env.local   # then fill in the values
+
+# 3. run
+npm run dev                  # http://localhost:3000
 ```
 
-### Run the development server
+### Environment variables
 
-```bash
-npm run dev
+The contact form needs three variables (documented in `.env.example`):
+
+| Variable | Purpose |
+|----------|---------|
+| `RESEND_API_KEY` | Resend API key used to send mail |
+| `CONTACT_FROM_EMAIL` | Verified sender on `gurlivleen.dev` |
+| `CONTACT_TO_EMAIL` | Where submissions are delivered |
+
+Full setup (Resend domain verification, Cloudflare Email Routing, and the
+production secret) is documented in **[CONTACT.md](./CONTACT.md)**.
+
+---
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start the dev server (Turbopack) |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | ESLint with `--fix` |
+
+> Use **Node 22 LTS**. Newer odd releases (e.g. Node 25) break the Firebase CLI.
+
+---
+
+## Project structure
+
+```
+app/                 # App Router routes
+  (about)/           # route group: resume, skills, achievements
+  about/  contact/  blog/  projects/[slug]/
+  api/contact/       # contact form route handler (Resend)
+  sitemap.ts  robots.ts
+components/           # shared UI (navbar, footer, motion, primitives, icons, …)
+config/              # tunable settings (site.ts = single source of truth, fonts.ts)
+data/                # domain content records (experience, education, projects, skills)
+metadata/            # per-route SEO (keywords + Metadata), imported via @/metadata
+types/               # TypeScript interfaces, one file per domain
+styles/  public/
+apphosting.yaml      # Firebase App Hosting config
 ```
 
-### Setup pnpm (optional)
+See [CLAUDE.md](./CLAUDE.md) for detailed conventions.
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+---
 
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
+## Deployment
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+Deployed on **Firebase App Hosting** (`apphosting.yaml` + `firebase.json`).
+`RESEND_API_KEY` is stored in Cloud Secret Manager; the other env vars are plain
+values. See [CONTACT.md](./CONTACT.md) for the secret-setup command.
+
+---
 
 ## License
 
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+Personal project. Code may be referenced for learning; content and branding are
+© Gurlivleen Singh Kainth.
