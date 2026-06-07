@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { skillsMetadata } from "@/config/page-metadata";
+import { skillsMetadata } from "@/config/metadata";
 
 export const metadata: Metadata = skillsMetadata;
 

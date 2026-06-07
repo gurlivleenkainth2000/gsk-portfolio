@@ -1,8 +1,11 @@
-// config/home-metadata.ts
+// config/metadata/root.ts
+//
+// Site-wide default metadata, applied in app/layout.tsx. Every route inherits
+// these fields and overrides only what differs (see the per-page files).
+
 import type { Metadata } from "next";
 
-import { siteConfig } from "./site";
-
+import { siteConfig } from "@/config/site";
 import { homeKeywords } from "@/data/keywords";
 
 export const rootMetadata: Metadata = {
