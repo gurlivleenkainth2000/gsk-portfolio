@@ -9,8 +9,8 @@ export interface ExploreCardItem {
   label: string;
   /** Destination URL. Internal routes use NextLink; external use HeroUI <Link isExternal>. */
   href: string;
-  /** One-line description shown under the label. */
-  description: string;
+  /** One-line description shown under the label. Optional — omit for a compact, label-only card. */
+  description?: string;
   /** Optional leading icon — pass a rendered node, e.g. `icon: <WorkIcon />`. */
   icon?: ReactNode;
   /**

@@ -56,7 +56,12 @@ export const projects: ProjectEntry[] = [
       "fintech app",
     ],
     links: [
-      { type: "website", label: "coupaso.de (DE)", url: "https://coupaso.de/" },
+      {
+        type: "website",
+        label: "coupaso.de (DE)",
+        url: "https://coupaso.de/",
+        description: "The live cashback app — upload a receipt, earn rewards.",
+      },
     ],
     overview:
       "A cashback app where people upload photos of their shopping receipts, an AI pipeline reads and checks the items, and an admin team approves the rewards and pays them out. I owned the admin dashboard and the whole cloud-functions backend.",
@@ -152,11 +157,13 @@ export const projects: ProjectEntry[] = [
         type: "website",
         label: "heroecotech.in",
         url: "https://heroecotech.in/",
+        description: "Hero Ecotech — the live corporate site.",
       },
       {
         type: "website",
         label: "krossbikes.in",
         url: "https://krossbikes.in/",
+        description: "Kross Bikes — the live e-commerce storefront.",
       },
     ],
     overview:
@@ -247,6 +254,8 @@ export const projects: ProjectEntry[] = [
         type: "website",
         label: "mentcape.com (DE)",
         url: "https://mentcape.com/",
+        description:
+          "The live platform where therapists run paid coaching programs.",
       },
     ],
     overview:
@@ -311,7 +320,14 @@ export const projects: ProjectEntry[] = [
       "fleet management",
       "revenue reporting",
     ],
-    links: [{ type: "website", label: "finlo.in", url: "https://finlo.in/" }],
+    links: [
+      {
+        type: "website",
+        label: "finlo.in",
+        url: "https://finlo.in/",
+        description: "The live Finlo product site.",
+      },
+    ],
     overview:
       "A management platform for a fleet of parking and transport sites, where every site is set up differently. I built the analytics and dashboard layer that had to adapt to each site's own configuration.",
     attribution:
@@ -385,7 +401,55 @@ export const projects: ProjectEntry[] = [
       "high distinction capstone",
       "real-time systems",
     ],
-    links: [],
+    links: [
+      {
+        type: "linkedin",
+        label: "Exhibition writeup",
+        url: "https://www.linkedin.com/posts/gurlivleen2000_swinburne-capstone-softwareengineering-activity-7397162848621088768-CbC5",
+        description:
+          "LinkedIn writeup — the problem, the FastAPI proxy, and the five-layer architecture.",
+      },
+      {
+        type: "linkedin",
+        label: "Team & client",
+        url: "https://www.linkedin.com/posts/gurlivleen2000_some-more-glimpses-from-capstone-project-activity-7397176146544660480-mZRc",
+        description:
+          "Photos from the Swinburne Capstone Exhibition with the team and Virtual Sailing's CEO.",
+      },
+      {
+        type: "website",
+        label: "Virtual Sailing",
+        url: "https://www.virtualsailing.com.au/",
+        description:
+          "Virtual Sailing Pty Ltd — the industry client behind the capstone brief.",
+      },
+    ],
+    poster: {
+      src: "/projects/technology-project-poster.png",
+      alt: "Sail Simulation Race Display capstone poster: problem, FastAPI proxy solution, five-layer architecture, and team — shown at the Swinburne Capstone Exhibition.",
+      width: 1654,
+      height: 2340,
+      caption:
+        "Capstone exhibition poster — the problem, the FastAPI proxy solution, and the five-layer architecture. Shown at the Swinburne Capstone Exhibition (CdSESS 2025 People's Choice voting).",
+    },
+    gallery: [
+      {
+        src: "/projects/simulation-demo-with-real-equipment.jpg",
+        alt: "Live demo of the race-display dashboards running on the physical sailing simulator at the Swinburne Capstone Exhibition.",
+        width: 1200,
+        height: 1835,
+        caption:
+          "The race-display dashboards running live on the real simulator equipment at the exhibition.",
+      },
+      {
+        src: "/projects/simulator.jpg",
+        alt: "The sailing simulator hardware that emits the binary UDP/TCP telemetry the server decodes.",
+        width: 1300,
+        height: 839,
+        caption:
+          "The sailing simulator that produces the binary telemetry the server decodes.",
+      },
+    ],
     overview:
       "A real-time bridge between sailboat simulators and browser dashboards. It takes in binary UDP and TCP telemetry, decodes it, and streams it to web clients over WebSockets. I inherited a stalled multi-cohort codebase and shipped it to the industry client's requirements.",
     attribution:
@@ -547,11 +611,14 @@ export const projects: ProjectEntry[] = [
         type: "github",
         label: "Client repo",
         url: "https://github.com/gurlivleenkainth2000/OBE-CLIENT",
+        description: "OBE-CLIENT — the Angular frontend, public on GitHub.",
       },
       {
         type: "github",
         label: "Server repo",
         url: "https://github.com/gurlivleenkainth2000/OBE-SERVER",
+        description:
+          "OBE-SERVER — the Node/Express + Mongo backend, public on GitHub.",
       },
     ],
     overview:
