@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { aboutMetadata } from "@/config/page-metadata";
+import { aboutMetadata } from "@/config/metadata";
 
 export const metadata: Metadata = aboutMetadata;
 
