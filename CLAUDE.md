@@ -21,7 +21,7 @@ This file provides context for AI assistants (Claude, Copilot, etc.) working in 
 | Styling | Tailwind CSS 4, Tailwind Variants, Emotion |
 | Animations | Framer Motion |
 | Theming | next-themes (light / dark via CSS class) |
-| Icons | Custom SVGs in `components/icons.tsx` + MUI Icons |
+| Icons | Custom SVGs in `components/icons/` + MUI Icons (re-exported via `icons/material.ts`) |
 | Fonts | Inter (sans) + Fira Code (mono) via Google Fonts |
 | Forms / Email | react-hook-form + Resend (contact form) |
 | Linting | ESLint 9 flat config + Prettier |
@@ -57,7 +57,8 @@ gsk-portfolio/
 │   ├── motion.ts           # Shared Framer Motion variants (stagger / fade)
 │   ├── primitives.ts       # Tailwind Variants style primitives
 │   ├── page-background.tsx # Decorative background
-│   ├── icons.tsx           # All SVG icon components
+│   ├── icons/              # Icon module: logo / brand / ui (custom SVGs) + material (MUI re-exports) + index barrel
+│   ├── json-ld.tsx         # <script type="application/ld+json"> emitter (server component)
 │   ├── explore-card/  projects/  timeline/  # feature component groups
 │   └── linkedin-badge.tsx  # Dynamic-import LinkedIn badge (SSR disabled)
 ├── config/                 # App configuration — tunable settings only
@@ -69,7 +70,7 @@ gsk-portfolio/
 │   ├── shared.ts           # baseUrl, ogImage(), baseKeywords, dedupe()
 │   ├── root.ts             # homeKeywords + rootMetadata (site-wide defaults)
 │   ├── about.ts  contact.ts  blog.ts  projects.ts  resume.ts  skills.ts  achievements.ts
-│   ├── structured-data.ts  # schema.org Person JSON-LD (personSchema)
+│   ├── structured-data.ts  # JSON-LD builders: personSchema, breadcrumbSchema(), projectSchema()
 │   └── index.ts            # Barrel — import from "@/metadata"
 ├── types/                  # TypeScript interfaces — one file per domain
 │   ├── index.ts            # Shared utility types (e.g. IconSvgProps)
@@ -161,6 +162,13 @@ npm run lint      # runs: eslint --fix
 - A page with `"use client"` **cannot** export `metadata`. Wrap it with a sibling `layout.tsx` that does: `export const metadata = <route>Metadata` from `@/metadata` (see `app/about/layout.tsx`, `app/contact/layout.tsx`).
 - The `(about)` route group holds `resume`, `skills`, `achievements` — each a client `page.tsx` + a `layout.tsx` exporting its metadata. Parentheses mean no URL segment, so they resolve to `/resume`, `/skills`, `/achievements`.
 
+### Structured data (JSON-LD)
+- Schema builders live in `metadata/structured-data.ts` and render through `<JsonLd data={...} />` (`components/json-ld.tsx`, a server component). `data` accepts one schema object or an array.
+- `personSchema` (site owner) is emitted once in `app/layout.tsx` and applies site-wide.
+- Per-page schema is added in the page's **server component**: `/projects/[slug]` emits `projectSchema(project)` plus a `breadcrumbSchema(...)`; `/projects` emits a breadcrumb.
+- Use `CreativeWork` for a project case study, **not** `SoftwareApplication` — the latter flags missing `offers` / `aggregateRating` in Search Console without producing a richer result.
+- `breadcrumbSchema(crumbs)` takes `{ name, path }[]`; the site URL is prefixed automatically.
+
 ### Contact form / email
 - `/contact` (`app/contact/page.tsx`, client) posts JSON to `app/api/contact/route.ts`.
 - The route re-validates server-side, drops honeypot (`company`) submissions silently, and sends via **Resend** with `replyTo` set to the sender. It reads `RESEND_API_KEY` / `CONTACT_FROM_EMAIL` / `CONTACT_TO_EMAIL` from env and returns 400 / 500 / 502 on bad input / missing config / send failure.
@@ -177,9 +185,11 @@ npm run lint      # runs: eslint --fix
 - Do not add CSS keyframe animations when Framer Motion already exists in the bundle.
 
 ### Icons
-- Add all new SVG icons to `components/icons.tsx` as named exports.
-- Accept `size`, `width`, `height`, and spread `...props` (see `IconSvgProps` in `types/index.ts`).
-- Use `currentColor` in SVG fills/strokes so icons inherit text colour.
+- Icons live in the `components/icons/` module, re-exported through its `index.ts` barrel. Import everything from `@/components/icons`.
+  - `logo.tsx` — the brand mark. `brand.tsx` — social glyphs (GitHub, LinkedIn, Discord, Twitter). `ui.tsx` — UI glyphs (search, theme sun/moon).
+  - `material.ts` — every MUI icon used in the app, re-exported one per path (`export { default as XIcon } from "@mui/icons-material/X"`) so tree-shaking is preserved. **Never** `export * from "@mui/icons-material"`.
+- Custom SVGs accept `size`, `width`, `height`, and spread `...props` (see `IconSvgProps` in `types/index.ts`), and use `currentColor` so they inherit text colour.
+- One canonical icon per brand: e.g. `LinkedinIcon` is a custom glyph in `brand.tsx` (not the MUI one) so it matches `GithubIcon`'s weight.
 
 ### Path alias
 - `@/` maps to the repository root (configured in `tsconfig.json`).
@@ -194,7 +204,7 @@ npm run lint      # runs: eslint --fix
 - **Do not add `console.log`** statements; ESLint is configured to warn on them.
 - **Do not modify `package-lock.json` manually;** always use `npm install`.
 - **Footer is intentionally commented out** in `app/layout.tsx` — do not uncomment unless asked.
-- `app/blog` is a stub page; Home, About, Contact, Projects (+ `[slug]`), Resume, Skills, and Achievements are built.
+- `app/blog` is a stub page, hidden from the navbar (`config/site.ts`) and the sitemap until it has real content; Home, About, Contact, Projects (+ `[slug]`), Resume, Skills, and Achievements are built.
 - **Never commit secrets.** `RESEND_API_KEY` lives only in `.env.local` (local) and Cloud Secret Manager (prod). Email addresses are not secrets.
 - ESLint uses **v9 flat config** (`eslint.config.mjs`). Legacy `.eslintrc.*` files are not supported.
 - The project targets **ES5** output (`tsconfig.json`) — avoid browser-specific APIs without polyfills.
