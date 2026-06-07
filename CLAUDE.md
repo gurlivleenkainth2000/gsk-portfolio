@@ -21,7 +21,7 @@ This file provides context for AI assistants (Claude, Copilot, etc.) working in 
 | Styling | Tailwind CSS 4, Tailwind Variants, Emotion |
 | Animations | Framer Motion |
 | Theming | next-themes (light / dark via CSS class) |
-| Icons | Custom SVGs in `components/icons.tsx` + MUI Icons |
+| Icons | Custom SVGs in `components/icons/` + MUI Icons (re-exported via `icons/material.ts`) |
 | Fonts | Inter (sans) + Fira Code (mono) via Google Fonts |
 | Forms / Email | react-hook-form + Resend (contact form) |
 | Linting | ESLint 9 flat config + Prettier |
@@ -57,7 +57,8 @@ gsk-portfolio/
 │   ├── motion.ts           # Shared Framer Motion variants (stagger / fade)
 │   ├── primitives.ts       # Tailwind Variants style primitives
 │   ├── page-background.tsx # Decorative background
-│   ├── icons.tsx           # All SVG icon components
+│   ├── icons/              # Icon module: logo / brand / ui (custom SVGs) + material (MUI re-exports) + index barrel
+│   ├── json-ld.tsx         # <script type="application/ld+json"> emitter (server component)
 │   ├── explore-card/  projects/  timeline/  # feature component groups
 │   └── linkedin-badge.tsx  # Dynamic-import LinkedIn badge (SSR disabled)
 ├── config/                 # App configuration — tunable settings only
@@ -69,7 +70,7 @@ gsk-portfolio/
 │   ├── shared.ts           # baseUrl, ogImage(), baseKeywords, dedupe()
 │   ├── root.ts             # homeKeywords + rootMetadata (site-wide defaults)
 │   ├── about.ts  contact.ts  blog.ts  projects.ts  resume.ts  skills.ts  achievements.ts
-│   ├── structured-data.ts  # schema.org Person JSON-LD (personSchema)
+│   ├── structured-data.ts  # JSON-LD builders: personSchema, breadcrumbSchema(), projectSchema()
 │   └── index.ts            # Barrel — import from "@/metadata"
 ├── types/                  # TypeScript interfaces — one file per domain
 │   ├── index.ts            # Shared utility types (e.g. IconSvgProps)
@@ -85,13 +86,31 @@ gsk-portfolio/
 
 ---
 
+## Documentation
+
+Long-form guides live in [`docs/`](./docs) (single source of truth — this file
+links to them rather than duplicating):
+
+- [docs/architecture.md](./docs/architecture.md) — rendering model, directory
+  responsibilities, config/data/metadata separation, icons module, theming.
+- [docs/routing.md](./docs/routing.md) — route tree, route groups, client-page
+  metadata pattern, dynamic `[slug]` routes, navigation source.
+- [docs/seo.md](./docs/seo.md) — metadata + inheritance gotcha, keywords, JSON-LD,
+  sitemap / robots, Search Console.
+- [docs/contact.md](./docs/contact.md) — contact-form / email setup (Resend + Cloudflare).
+- [docs/deployment.md](./docs/deployment.md) — setup, fork checklist, Firebase App Hosting config.
+
+Dated design records are in [`docs/specs/`](./docs/specs).
+
+---
+
 ## Development Workflows
 
 ### Environment setup
 ```bash
 cp .env.example .env.local   # fill RESEND_API_KEY / CONTACT_FROM_EMAIL / CONTACT_TO_EMAIL
 ```
-`.env*.local` is gitignored. See `CONTACT.md` for full contact-form setup.
+`.env*.local` is gitignored. See `docs/contact.md` for full contact-form setup.
 
 ### Start dev server
 ```bash
@@ -146,25 +165,24 @@ npm run lint      # runs: eslint --fix
 - **Emotion** is used internally by HeroUI; do not use it for custom components.
 
 ### Configuration vs data vs metadata — separation
-- `config/` is for **tunable app settings only** — site name, URL, fonts, nav route definitions. If it controls *how the app behaves*, it belongs here.
-- `data/` is for **domain content records** — arrays of entries that represent things in the world (jobs, courses, projects, skills). If it would naturally have a corresponding type in `types/`, it belongs here.
-- `metadata/` is for **per-route SEO** — each route's keyword list and Next.js `Metadata` object, co-located one file per route and imported via `@/metadata`. Per-project keyword *content* stays on each `ProjectEntry` in `data/projects.ts` and is combined by `projectKeywords()` in `metadata/projects.ts`.
+- `config/` = tunable app settings (name, URL, fonts, nav routes). `data/` = domain content records with a matching `types/` interface. `metadata/` = per-route SEO + JSON-LD.
 - Test: would this still exist if the design changed? If yes → `data/`. If no → `config/` (or `metadata/` for search / social presentation).
-- Note: `sitemap.ts` and `robots.ts` are Next.js file-convention routes and live in `app/`, not in `metadata/`.
+- `sitemap.ts` / `robots.ts` are file-convention routes in `app/`, not `metadata/`. Full detail: [docs/architecture.md](./docs/architecture.md) and [docs/seo.md](./docs/seo.md).
 
 ### Configuration as single source of truth
-- All personal info, navigation links, and social URLs live in `config/site.ts` (`siteConfig`).
-- Do **not** hardcode names, emails, or links in components — import from `siteConfig`.
-- SEO keywords + `Metadata` live in `metadata/` (one file per route; site-wide defaults in `metadata/root.ts`), imported via `@/metadata`. Each file exports both the route's keyword array and its `Metadata` object.
+- All personal info, navigation links, and social URLs live in `config/site.ts` (`siteConfig`). Do **not** hardcode names, emails, or links in components — import from `siteConfig`.
+- SEO lives in `metadata/` (one file per route, exporting a keyword array + `Metadata`), imported via `@/metadata`. See [docs/seo.md](./docs/seo.md).
 
 ### Metadata on client-component pages
-- A page with `"use client"` **cannot** export `metadata`. Wrap it with a sibling `layout.tsx` that does: `export const metadata = <route>Metadata` from `@/metadata` (see `app/about/layout.tsx`, `app/contact/layout.tsx`).
-- The `(about)` route group holds `resume`, `skills`, `achievements` — each a client `page.tsx` + a `layout.tsx` exporting its metadata. Parentheses mean no URL segment, so they resolve to `/resume`, `/skills`, `/achievements`.
+- A `"use client"` page **cannot** export `metadata`; a sibling `layout.tsx` exports it instead (see `app/about/layout.tsx`). The `(about)` group holds `resume` / `skills` / `achievements`. Detail: [docs/routing.md](./docs/routing.md#metadata-on-client-pages).
+
+### Structured data (JSON-LD)
+- JSON-LD builders in `metadata/structured-data.ts` render via `<JsonLd data={...} />` (`components/json-ld.tsx`). `personSchema` is site-wide (`app/layout.tsx`); `/projects/[slug]` adds `projectSchema(project)` (a `CreativeWork`, **not** `SoftwareApplication`) + a breadcrumb. Detail: [docs/seo.md](./docs/seo.md#structured-data-json-ld).
 
 ### Contact form / email
 - `/contact` (`app/contact/page.tsx`, client) posts JSON to `app/api/contact/route.ts`.
 - The route re-validates server-side, drops honeypot (`company`) submissions silently, and sends via **Resend** with `replyTo` set to the sender. It reads `RESEND_API_KEY` / `CONTACT_FROM_EMAIL` / `CONTACT_TO_EMAIL` from env and returns 400 / 500 / 502 on bad input / missing config / send failure.
-- Sending is Resend; **receiving** (`contact@gurlivleen.dev` → Gmail) is handled by Cloudflare Email Routing, not Resend. Full setup is in `CONTACT.md`.
+- Sending is Resend; **receiving** (`contact@gurlivleen.dev` → Gmail) is handled by Cloudflare Email Routing, not Resend. Full setup is in `docs/contact.md`.
 
 ### Types
 - One file per domain: `types/experience.ts`, `types/education.ts`, etc.
@@ -177,9 +195,8 @@ npm run lint      # runs: eslint --fix
 - Do not add CSS keyframe animations when Framer Motion already exists in the bundle.
 
 ### Icons
-- Add all new SVG icons to `components/icons.tsx` as named exports.
-- Accept `size`, `width`, `height`, and spread `...props` (see `IconSvgProps` in `types/index.ts`).
-- Use `currentColor` in SVG fills/strokes so icons inherit text colour.
+- Icons live in `components/icons/` (barrel `index.ts`); import from `@/components/icons`. Custom SVGs in `logo` / `brand` (social) / `ui`; MUI icons re-exported one-per-path in `material.ts` (**never** `export * from "@mui/icons-material"`).
+- Custom SVGs use `IconSvgProps` + `currentColor`; one canonical icon per brand (e.g. `LinkedinIcon` is the custom glyph, matching `GithubIcon`). Detail: [docs/architecture.md](./docs/architecture.md#icons-module).
 
 ### Path alias
 - `@/` maps to the repository root (configured in `tsconfig.json`).
@@ -194,7 +211,7 @@ npm run lint      # runs: eslint --fix
 - **Do not add `console.log`** statements; ESLint is configured to warn on them.
 - **Do not modify `package-lock.json` manually;** always use `npm install`.
 - **Footer is intentionally commented out** in `app/layout.tsx` — do not uncomment unless asked.
-- `app/blog` is a stub page; Home, About, Contact, Projects (+ `[slug]`), Resume, Skills, and Achievements are built.
+- `app/blog` is a stub page, hidden from the navbar (`config/site.ts`) and the sitemap until it has real content; Home, About, Contact, Projects (+ `[slug]`), Resume, Skills, and Achievements are built.
 - **Never commit secrets.** `RESEND_API_KEY` lives only in `.env.local` (local) and Cloud Secret Manager (prod). Email addresses are not secrets.
 - ESLint uses **v9 flat config** (`eslint.config.mjs`). Legacy `.eslintrc.*` files are not supported.
 - The project targets **ES5** output (`tsconfig.json`) — avoid browser-specific APIs without polyfills.
