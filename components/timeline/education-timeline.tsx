@@ -5,9 +5,9 @@ import type { EducationEntry } from "@/types/education";
 import { motion } from "framer-motion";
 import { Chip } from "@heroui/chip";
 import { Link } from "@heroui/link";
-import SchoolIcon from "@mui/icons-material/School";
 
 import { title } from "@/components/primitives";
+import { SchoolIcon } from "@/components/icons";
 import { fadeUp } from "@/components/motion";
 import { TimelineShell } from "@/components/timeline/shell";
 import { TimelineEntry } from "@/components/timeline/entry";

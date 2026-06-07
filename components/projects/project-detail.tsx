@@ -7,17 +7,19 @@ import { Divider } from "@heroui/divider";
 import { Chip } from "@heroui/chip";
 import { Link } from "@heroui/link";
 import NextLink from "next/link";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import LockIcon from "@mui/icons-material/Lock";
-import PersonIcon from "@mui/icons-material/Person";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import GroupsIcon from "@mui/icons-material/Groups";
-import BusinessIcon from "@mui/icons-material/Business";
-import CategoryIcon from "@mui/icons-material/Category";
 
 import { title } from "@/components/primitives";
 import { staggerContainer, fadeUp } from "@/components/motion";
 import { ProjectLinks } from "@/components/projects/project-links";
+import {
+  ArrowBackIcon,
+  LockIcon,
+  PersonIcon,
+  CalendarMonthIcon,
+  GroupsIcon,
+  BusinessIcon,
+  CategoryIcon,
+} from "@/components/icons";
 import { ChallengeBlock } from "@/components/projects/challenge-block";
 import { ArchitectureFigure } from "@/components/projects/architecture-figure";
 import { ProjectNav } from "@/components/projects/project-nav";

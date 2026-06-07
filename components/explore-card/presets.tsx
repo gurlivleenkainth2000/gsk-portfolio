@@ -1,14 +1,15 @@
 import type { ExploreCardItem } from "@/types/explore-card";
 
-import WorkIcon from "@mui/icons-material/Work";
-import DescriptionIcon from "@mui/icons-material/Description";
-import PsychologyIcon from "@mui/icons-material/Psychology";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import ArticleIcon from "@mui/icons-material/Article";
-import LinkedinIcon from "@mui/icons-material/LinkedIn";
-
 import { siteConfig } from "@/config/site";
-import { GithubIcon } from "@/components/icons";
+import {
+  GithubIcon,
+  WorkIcon,
+  DescriptionIcon,
+  PsychologyIcon,
+  EmojiEventsIcon,
+  ArticleIcon,
+  LinkedinIcon,
+} from "@/components/icons";
 
 /**
  * Pre-built ExploreCardItem definitions for the portfolio's core destinations.
