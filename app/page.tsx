@@ -86,7 +86,7 @@ export default function Home() {
             className={buttonStyles({ variant: "bordered", radius: "full" })}
             href={siteConfig.links.linkedin}
           >
-            <LinkedinIcon className="mr-1" fontSize="small" /> LinkedIn
+            <LinkedinIcon className="mr-1" size={18} /> LinkedIn
           </Link>
 
           <Link
