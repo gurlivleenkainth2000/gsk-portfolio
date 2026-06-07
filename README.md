@@ -31,7 +31,8 @@ deployed on Firebase App Hosting.
 - **Contact form** (`/contact`) with client-side validation, a hidden honeypot,
   and server-side delivery via Resend (see [CONTACT.md](./CONTACT.md)).
 - **Per-route SEO** — every route owns its keywords + Next.js `Metadata`, plus
-  `sitemap.ts`, `robots.ts`, and schema.org `Person` JSON-LD.
+  `sitemap.ts`, `robots.ts`, and JSON-LD structured data (site-wide `Person`,
+  per-project `CreativeWork`, and `BreadcrumbList` trails).
 - Light / dark theming, responsive navbar, and Framer Motion entrance
   animations throughout.
 
