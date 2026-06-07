@@ -1,7 +1,8 @@
 import type { ProjectArchitecture } from "@/types/project";
 
 import { Fragment } from "react";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+
+import { ArrowForwardIcon } from "@/components/icons";
 
 /**
  * "How it works" — a numbered flow rendered from data (no image asset).

@@ -3,7 +3,8 @@ import type { ProjectEntry } from "@/types/project";
 import { Card, CardBody } from "@heroui/card";
 import { Chip } from "@heroui/chip";
 import NextLink from "next/link";
-import StarIcon from "@mui/icons-material/Star";
+
+import { StarIcon } from "@/components/icons";
 
 const statusColor = {
   live: "success",

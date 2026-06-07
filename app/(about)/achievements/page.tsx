@@ -3,11 +3,9 @@
 import { motion } from "framer-motion";
 import { Chip } from "@heroui/chip";
 import { Divider } from "@heroui/divider";
-import SchoolIcon from "@mui/icons-material/School";
-import WorkIcon from "@mui/icons-material/Work";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 import { title } from "@/components/primitives";
+import { SchoolIcon, WorkIcon, EmojiEventsIcon } from "@/components/icons";
 import { staggerContainer, fadeUp } from "@/components/motion";
 
 interface Achievement {

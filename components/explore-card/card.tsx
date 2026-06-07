@@ -3,7 +3,8 @@ import type { ExploreCardItem } from "@/types/explore-card";
 import { Card, CardBody } from "@heroui/card";
 import { Link } from "@heroui/link";
 import NextLink from "next/link";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
+import { ArrowOutwardIcon } from "@/components/icons";
 
 /**
  * A single explore card — internal or external destination.
