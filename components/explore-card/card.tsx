@@ -20,6 +20,7 @@ export function ExploreCard({
   href,
   description,
   icon,
+  trailingIcon = <ArrowOutwardIcon fontSize="small" />,
   external = false,
 }: ExploreCardItem) {
   const cardInner = (
@@ -43,10 +44,11 @@ export function ExploreCard({
             </p>
           </div>
         </div>
-        <ArrowOutwardIcon
-          className="text-foreground/30 group-hover:text-primary transition-colors shrink-0"
-          fontSize="small"
-        />
+        {trailingIcon && (
+          <span className="text-foreground/30 group-hover:text-primary transition-colors shrink-0">
+            {trailingIcon}
+          </span>
+        )}
       </CardBody>
     </Card>
   );
