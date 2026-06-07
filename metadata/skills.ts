@@ -1,11 +1,34 @@
-// config/metadata/skills.ts
+// metadata/skills.ts
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage } from "./shared";
+import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
 
 import { siteConfig } from "@/config/site";
-import { skillsKeywords } from "@/data/keywords";
+
+export const skillsKeywords: string[] = dedupe(baseKeywords, [
+  "Technical Skills",
+  "Tech Stack",
+  "Programming Languages",
+  "Frameworks",
+  "TypeScript",
+  "JavaScript",
+  "Python",
+  "Go",
+  "Java",
+  "Next.js",
+  "React",
+  "Angular",
+  "Flutter",
+  "Node.js",
+  "Firebase",
+  "Google Cloud",
+  "Docker",
+  "CI/CD",
+  "DevOps",
+  "REST API",
+  "Microservices",
+]);
 
 export const skillsMetadata: Metadata = {
   title: "Skills",

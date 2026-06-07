@@ -1,11 +1,21 @@
-// config/metadata/achievements.ts
+// metadata/achievements.ts
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage } from "./shared";
+import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
 
 import { siteConfig } from "@/config/site";
-import { achievementsKeywords } from "@/data/keywords";
+
+export const achievementsKeywords: string[] = dedupe(baseKeywords, [
+  "Achievements",
+  "Awards",
+  "Academic Highlights",
+  "Swinburne Capstone",
+  "High Distinction",
+  "HD 90/100",
+  "Engineering Recognition",
+  "Professional Highlights",
+]);
 
 export const achievementsMetadata: Metadata = {
   title: "Achievements",

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 import { siteConfig } from "@/config/site";
 import { projects, getProjectBySlug } from "@/data/projects";
-import { projectKeywords } from "@/data/keywords";
+import { projectKeywords } from "@/metadata";
 import { ProjectDetail } from "@/components/projects/project-detail";
 
 type Params = { params: Promise<{ slug: string }> };

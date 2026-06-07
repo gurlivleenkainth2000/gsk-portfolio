@@ -1,11 +1,21 @@
-// config/metadata/blog.ts
+// metadata/blog.ts
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage } from "./shared";
+import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
 
 import { siteConfig } from "@/config/site";
-import { blogKeywords } from "@/data/keywords";
+
+export const blogKeywords: string[] = dedupe(baseKeywords, [
+  "Engineering Blog",
+  "Software Engineering Notes",
+  "Backend Systems",
+  "Full-Stack Engineering",
+  "Cloud Engineering",
+  "TypeScript",
+  "Technical Writing",
+  "Developer Blog",
+]);
 
 export const blogMetadata: Metadata = {
   title: "Blog",

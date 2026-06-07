@@ -1,11 +1,26 @@
-// config/metadata/about.ts
+// metadata/about.ts
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage } from "./shared";
+import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
 
 import { siteConfig } from "@/config/site";
-import { aboutKeywords } from "@/data/keywords";
+
+export const aboutKeywords: string[] = dedupe(baseKeywords, [
+  "About Gurlivleen Singh Kainth",
+  "Backend Engineer Melbourne",
+  "Full-Stack Engineer Melbourne",
+  "Career Timeline",
+  "Software Engineer Biography",
+  "Punjab to Melbourne",
+  "Swinburne University of Technology",
+  "GNDEC",
+  "Enterprise Integration",
+  "Multi-tenant SaaS",
+  "Google Cloud",
+  "Firebase",
+  "TypeScript",
+]);
 
 export const aboutMetadata: Metadata = {
   title: "About",
