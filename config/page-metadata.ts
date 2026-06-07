@@ -12,7 +12,14 @@ import type { Metadata } from "next";
 
 import { siteConfig } from "./site";
 
-import { projectsKeywords } from "@/data/keywords";
+import {
+  aboutKeywords,
+  blogKeywords,
+  projectsKeywords,
+  resumeKeywords,
+  skillsKeywords,
+  achievementsKeywords,
+} from "@/data/keywords";
 
 const baseUrl = siteConfig.url;
 
@@ -21,6 +28,7 @@ const ogImage = (path = "/og-home.jpg") => `${baseUrl}${path}`;
 // ---------------------------------------------------------------- /about ----
 export const aboutMetadata: Metadata = {
   title: "About",
+  keywords: aboutKeywords,
   description:
     "About Gurlivleen Singh Kainth — Melbourne-based Backend / Full-Stack Engineer with 4+ years across enterprise integration platforms, AI-driven analytics, and multi-tenant SaaS on Google Cloud, Firebase, and modern TypeScript stacks.",
   alternates: { canonical: `${baseUrl}/about` },
@@ -55,6 +63,7 @@ export const aboutMetadata: Metadata = {
 // ----------------------------------------------------------------- /blog ----
 export const blogMetadata: Metadata = {
   title: "Blog",
+  keywords: blogKeywords,
   description:
     "Notes and writing on backend systems, full-stack engineering, and the cloud / TypeScript stacks I work in — by Gurlivleen Singh Kainth.",
   alternates: { canonical: `${baseUrl}/blog` },
@@ -124,6 +133,7 @@ export const projectsMetadata: Metadata = {
 // --------------------------------------------------------------- /resume ----
 export const resumeMetadata: Metadata = {
   title: "Resume",
+  keywords: resumeKeywords,
   description:
     "Two-page resume of Gurlivleen Singh Kainth — Backend / Full-Stack Engineer. 4+ years across enterprise integration platforms, AI-driven analytics, and multi-tenant SaaS.",
   alternates: { canonical: `${baseUrl}/resume` },
@@ -158,6 +168,7 @@ export const resumeMetadata: Metadata = {
 // --------------------------------------------------------------- /skills ----
 export const skillsMetadata: Metadata = {
   title: "Skills",
+  keywords: skillsKeywords,
   description:
     "Technical skills of Gurlivleen Singh Kainth — languages, frameworks, and tooling used day-to-day across backend, full-stack, mobile, cloud, and DevOps work.",
   alternates: { canonical: `${baseUrl}/skills` },
@@ -192,6 +203,7 @@ export const skillsMetadata: Metadata = {
 // --------------------------------------------------------- /achievements ----
 export const achievementsMetadata: Metadata = {
   title: "Achievements",
+  keywords: achievementsKeywords,
   description:
     "Selected academic and professional highlights of Gurlivleen Singh Kainth — including the Swinburne capstone (HD, 90/100) and engineering recognition.",
   alternates: { canonical: `${baseUrl}/achievements` },
