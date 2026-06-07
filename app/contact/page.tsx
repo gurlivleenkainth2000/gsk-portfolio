@@ -2,6 +2,7 @@
 
 import type { ContactFormValues } from "@/types/contact";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Input, Textarea } from "@heroui/input";
@@ -22,24 +23,53 @@ import { GithubIcon } from "@/components/icons";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactPage() {
+  const [sent, setSent] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    setError,
+    clearErrors,
+    formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
-    defaultValues: { name: "", email: "", subject: "", message: "" },
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+      company: "",
+    },
   });
 
   const onSubmit = async (data: ContactFormValues) => {
-    // TODO(backend): wire a real submit handler.
-    // Options: Formspree / Web3Forms / a Next.js route handler that delivers
-    // to the inbox configured for contact@gurlivleen.dev.
-    // For now this is a no-op stub so the page is fully functional UI-side.
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    clearErrors("root");
 
-    void data;
-    reset();
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const payload = (await res.json().catch(() => ({}))) as {
+          error?: string;
+        };
+
+        setError("root.serverError", {
+          message: payload.error ?? "Something went wrong. Please try again.",
+        });
+
+        return;
+      }
+
+      reset();
+      setSent(true);
+    } catch {
+      setError("root.serverError", {
+        message: "Network error — please try again in a moment.",
+      });
+    }
   };
 
   return (
@@ -88,9 +118,11 @@ export default function ContactPage() {
         viewport={{ once: true, amount: 0.1 }}
         whileInView="visible"
       >
-        {isSubmitSuccessful ? (
+        {sent ? (
           <motion.div
+            animate="visible"
             className="flex flex-col items-center text-center gap-3 py-10"
+            initial="hidden"
             variants={fadeUp}
           >
             <CheckCircleIcon className="text-success" fontSize="large" />
@@ -105,7 +137,10 @@ export default function ContactPage() {
               radius="full"
               size="sm"
               variant="flat"
-              onPress={() => reset()}
+              onPress={() => {
+                setSent(false);
+                reset();
+              }}
             >
               Send another message
             </Button>
@@ -116,6 +151,15 @@ export default function ContactPage() {
             variants={fadeUp}
             onSubmit={handleSubmit(onSubmit)}
           >
+            {/* Honeypot — hidden from humans, lures bots into revealing themselves. */}
+            <input
+              aria-hidden="true"
+              autoComplete="off"
+              className="hidden"
+              tabIndex={-1}
+              {...register("company")}
+            />
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <Input
                 isRequired
@@ -177,6 +221,12 @@ export default function ContactPage() {
                 },
               })}
             />
+
+            {errors.root?.serverError && (
+              <p className="text-sm text-danger" role="alert">
+                {errors.root.serverError.message}
+              </p>
+            )}
 
             <Button
               className="self-start"
