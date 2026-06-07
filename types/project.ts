@@ -64,6 +64,13 @@ export interface ProjectEntry {
   /** Industry / domain tag. */
   domain: string;
   tech: string[];
+  /**
+   * Optional curated SEO keywords for this project's detail page. Layered on
+   * top of the auto-derived terms (name, domain, tech) by `projectKeywords()`
+   * — use for long-tail / intent terms not derivable from the fields above
+   * (e.g. "receipt OCR", "WebSocket server").
+   */
+  keywords?: string[];
   links: ProjectLink[];
   overview: string;
   /** Honest "what I owned vs the team" line. */

@@ -1,4 +1,8 @@
-// data/keywords.ts
+// data/keywords/home.ts
+//
+// Keywords for the site root (consumed by `config/root-metadata.ts`). These
+// are also inherited by any route that does not define its own `keywords`.
+
 export const homeKeywords: string[] = [
   // Personal identifiers
   "Gurlivleen",

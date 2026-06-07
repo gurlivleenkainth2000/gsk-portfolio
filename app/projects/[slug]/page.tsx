@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { siteConfig } from "@/config/site";
 import { projects, getProjectBySlug } from "@/data/projects";
+import { projectKeywords } from "@/data/keywords";
 import { ProjectDetail } from "@/components/projects/project-detail";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: project.name,
     description: project.subtitle,
+    keywords: projectKeywords(project),
     alternates: { canonical: url },
     openGraph: {
       type: "website",
