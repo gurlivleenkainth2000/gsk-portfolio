@@ -29,3 +29,4 @@ export {
 export { resumeKeywords, resumeMetadata } from "./resume";
 export { skillsKeywords, skillsMetadata } from "./skills";
 export { achievementsKeywords, achievementsMetadata } from "./achievements";
+export { personSchema } from "./structured-data";
