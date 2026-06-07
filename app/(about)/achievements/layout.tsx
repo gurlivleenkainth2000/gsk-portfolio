@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { achievementsMetadata } from "@/config/page-metadata";
+import { achievementsMetadata } from "@/metadata";
 
 export const metadata: Metadata = achievementsMetadata;
 

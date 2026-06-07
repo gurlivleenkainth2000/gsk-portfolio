@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { resumeMetadata } from "@/config/page-metadata";
+import { resumeMetadata } from "@/metadata";
 
 export const metadata: Metadata = resumeMetadata;
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { title } from "@/components/primitives";
-import { blogMetadata } from "@/config/page-metadata";
+import { blogMetadata } from "@/metadata";
 
 export const metadata: Metadata = blogMetadata;
 
