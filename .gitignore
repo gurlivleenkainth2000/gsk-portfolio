@@ -11,6 +11,8 @@
 # next.js
 /.next/
 /out/
+# stray build output (e.g. when distDir is redirected for a sandboxed build)
+/tmp/
 
 # production
 /build
