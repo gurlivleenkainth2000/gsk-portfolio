@@ -8,7 +8,7 @@ full-stack software engineer.
 [**Live → gurlivleen.dev**](https://gurlivleen.dev) &nbsp;·&nbsp;
 [LinkedIn](https://www.linkedin.com/in/gurlivleen2000/) &nbsp;·&nbsp;
 [GitHub](https://github.com/gurlivleenkainth2000) &nbsp;·&nbsp;
-[Résumé](./public/resume.pdf)
+[Résumé](https://cdn.gurlivleen.dev/resume.pdf)
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
@@ -18,7 +18,7 @@ full-stack software engineer.
 
 <br />
 
-<img src="./public/og-home.jpg" alt="gurlivleen.dev — portfolio preview" width="720" />
+<img src="https://cdn.gurlivleen.dev/og/home.png" alt="gurlivleen.dev — portfolio preview" width="720" />
 
 </div>
 
@@ -43,6 +43,9 @@ as a reference for how I structure a modern Next.js app — see [`docs/`](./docs
 - **Polished UX** — light / dark theming, a responsive navbar with active-route
   highlighting and an animated mobile menu, and Framer Motion entrance
   animations throughout.
+- **Assets on a CDN** — project images, the résumé, and per-page / per-project
+  Open Graph cards are served from Cloudflare R2 over `cdn.gurlivleen.dev`
+  (free egress, edge-cached) and kept out of the repo.
 
 ## Tech stack
 
@@ -55,6 +58,7 @@ as a reference for how I structure a modern Next.js app — see [`docs/`](./docs
 | Theming | next-themes (class-based light / dark) |
 | Forms / email | react-hook-form + Resend |
 | Hosting | Firebase App Hosting |
+| Assets / CDN | Cloudflare R2 (`cdn.gurlivleen.dev`) |
 | DNS / email routing | Cloudflare |
 
 ## Getting started
