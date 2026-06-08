@@ -6,9 +6,16 @@ The following are NOT covered by the MIT License and remain
 (c) Gurlivleen Singh Kainth, all rights reserved:
 
   - Written content: project case studies, descriptions, and site copy.
-  - Brand and image assets: the OG banner (og-home.jpg), favicon,
-    apple-touch-icon, and any logo or wordmark.
-  - The resume / CV (public/resume.pdf).
+  - Brand and image assets: the Open Graph banners (per-page and per-project,
+    served from cdn.gurlivleen.dev/og/), the favicon, apple-touch-icon, and any
+    logo or wordmark.
+  - The resume / CV (served from cdn.gurlivleen.dev/resume.pdf).
+  - Project images and screenshots (served from cdn.gurlivleen.dev/projects/).
+
+Most binary assets above are served from a Cloudflare R2 bucket and are not
+committed to this repository; only favicon.ico and apple-touch-icon.png remain
+in public/.
 
 If you fork this project, you may reuse the code under the MIT terms, but
-please replace the items above with your own.
+please replace the items above with your own (point CDN_URL in config/site.ts at
+your own bucket).

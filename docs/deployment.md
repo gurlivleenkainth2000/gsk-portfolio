@@ -69,8 +69,12 @@ If you cloned this to build your own portfolio, these are the things to change:
    Project case-study pages are generated from `data/projects.ts`.
 3. **SEO** — `metadata/*.ts`: per-route descriptions and keyword lists, and the
    `Person` / project schema in `metadata/structured-data.ts`. See [seo.md](./seo.md).
-4. **Assets** — `public/`: `resume.pdf`, `og-home.jpg` (1200x630 social card),
-   `favicon.ico`, `apple-touch-icon.png`.
+4. **Assets** — project images, the résumé PDF, and the OG social cards are
+   served from a Cloudflare R2 bucket via `cdn.gurlivleen.dev`, **not** committed
+   to `public/` (see [architecture.md](./architecture.md#assets-cloudflare-r2--cdn)
+   and the [Assets (Cloudflare R2)](#assets-cloudflare-r2) section below). Point
+   `CDN_URL` in `config/site.ts` at your own bucket domain and upload your assets.
+   `public/` keeps only `favicon.ico` + `apple-touch-icon.png`.
 5. **Deployment identifiers** — see the next section: the Firebase project alias,
    the App Hosting backend ID, and the secret name all reference this project and
    must be changed to yours.
@@ -177,6 +181,28 @@ when `development` is merged into `main`.
   you in Cloudflare.
 - Email for the domain (`contact@gurlivleen.dev` → Gmail) is handled by
   **Cloudflare Email Routing**, independent of hosting — see [contact.md](./contact.md).
+
+---
+
+## Assets (Cloudflare R2)
+
+Binary assets are served from a Cloudflare **R2** bucket over a CDN custom
+domain, independent of the app host:
+
+- Bucket `gurlivleen-dev`, custom domain `cdn.gurlivleen.dev` (R2 → bucket →
+  Settings → Custom Domains). Cloudflare auto-creates the DNS record, provisions
+  TLS, and edge-caches it — and R2 egress is free, so there's no separate CDN to
+  configure. Set the custom domain's **minimum TLS to 1.2**.
+- Upload `projects/…`, `resume.pdf`, and `og/…` (per-page banners plus
+  `og/projects/<slug>.png`). Set `Cache-Control: public, max-age=2592000` on the
+  objects; purge the Cloudflare cache for a URL if you replace a file in place.
+- Keep the bucket public-read; **Bucket Lock is not used** (it blocks updates and
+  doesn't make assets private).
+- The app references everything through `CDN_URL` / `asset()` in `config/site.ts`
+  and whitelists the host in `next.config.js` (`images.remotePatterns`).
+
+Deliberate split: Firebase App Hosting runs the app; Cloudflare holds DNS, email
+routing, and asset storage / CDN.
 
 ---
 
