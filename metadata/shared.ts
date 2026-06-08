@@ -10,9 +10,6 @@ import { siteConfig } from "@/config/site";
 
 export const baseUrl = siteConfig.url;
 
-/** Absolute URL for an OG / Twitter image asset (defaults to the home banner). */
-export const ogImage = (path = "/og-home.jpg"): string => `${baseUrl}${path}`;
-
 /**
  * Core identity / role / location keywords reused on every route. Next.js
  * `keywords` does NOT merge across segments — a child route's array fully

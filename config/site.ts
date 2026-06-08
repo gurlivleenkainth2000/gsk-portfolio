@@ -1,3 +1,10 @@
+// Base URL for static assets served from Cloudflare R2 via the CDN custom domain.
+export const CDN_URL = "https://cdn.gurlivleen.dev";
+
+// Build an absolute CDN URL from a leading-slash path: asset("/resume.pdf").
+export const asset = (path: string): string =>
+  `${CDN_URL}${path.startsWith("/") ? path : `/${path}`}`;
+
 export const siteConfig = {
   name: "Gurlivleen Singh Kainth",
   title: "Software Developer",
@@ -36,7 +43,7 @@ export const siteConfig = {
   // Optional metadata defaults
   meta: {
     title: "Gurlivleen Singh Kainth | Software Developer Portfolio",
-    ogImage: "/og-home.jpg",
+    ogImage: asset("/og/home.png"),
     keywords: [
       "Gurlivleen Singh Kainth",
       "Software Developer",

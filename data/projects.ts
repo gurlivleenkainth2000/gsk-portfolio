@@ -1,5 +1,7 @@
 import type { ProjectEntry } from "@/types/project";
 
+import { asset } from "@/config/site";
+
 // ---------------------------------------------------------------------------
 // Projects
 //
@@ -425,7 +427,7 @@ export const projects: ProjectEntry[] = [
       },
     ],
     poster: {
-      src: "/projects/technology-project-poster.png",
+      src: asset("/projects/technology-project-poster.png"),
       alt: "Sail Simulation Race Display capstone poster: problem, FastAPI proxy solution, five-layer architecture, and team — shown at the Swinburne Capstone Exhibition.",
       width: 1654,
       height: 2340,
@@ -434,7 +436,7 @@ export const projects: ProjectEntry[] = [
     },
     gallery: [
       {
-        src: "/projects/simulation-demo-with-real-equipment.jpg",
+        src: asset("/projects/simulation-demo-with-real-equipment.jpg"),
         alt: "Live demo of the race-display dashboards running on the physical sailing simulator at the Swinburne Capstone Exhibition.",
         width: 1200,
         height: 1835,
@@ -442,7 +444,7 @@ export const projects: ProjectEntry[] = [
           "The race-display dashboards running live on the real simulator equipment at the exhibition.",
       },
       {
-        src: "/projects/simulator.jpg",
+        src: asset("/projects/simulator.jpg"),
         alt: "The sailing simulator hardware that emits the binary UDP/TCP telemetry the server decodes.",
         width: 1300,
         height: 839,
