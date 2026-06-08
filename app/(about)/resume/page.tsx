@@ -7,11 +7,10 @@ import { button as buttonStyles } from "@heroui/theme";
 import { title } from "@/components/primitives";
 import { staggerContainer, fadeUp } from "@/components/motion";
 import { DownloadIcon, OpenInNewIcon } from "@/components/icons";
+import { asset } from "@/config/site";
 
-// TODO: Replace with the published resume URL.
-// Options: a PDF at /resume.pdf in /public, a published Google Doc, or both.
-const RESUME_PDF_PATH = "/resume.pdf";
-const RESUME_VIEW_URL = "/resume.pdf";
+const RESUME_PDF_PATH = asset("/resume.pdf");
+const RESUME_VIEW_URL = asset("/resume.pdf");
 
 export default function ResumePage() {
   return (

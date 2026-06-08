@@ -2,9 +2,9 @@
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
+import { baseUrl, baseKeywords, dedupe } from "./shared";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig, asset } from "@/config/site";
 
 export const achievementsKeywords: string[] = dedupe(baseKeywords, [
   "Achievements",
@@ -32,7 +32,7 @@ export const achievementsMetadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: ogImage(),
+        url: asset("/og/achievements.png"),
         width: 1200,
         height: 630,
         alt: "Achievements & Standouts — Gurlivleen Singh Kainth",
@@ -47,6 +47,6 @@ export const achievementsMetadata: Metadata = {
     title: `Achievements | ${siteConfig.name}`,
     description:
       "Academic and professional standouts — the work I'd point to first if asked what I've shipped.",
-    images: [ogImage()],
+    images: [asset("/og/achievements.png")],
   },
 };
