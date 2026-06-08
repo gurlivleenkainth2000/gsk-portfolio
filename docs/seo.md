@@ -18,7 +18,8 @@ the `@/metadata` barrel:
   Applied once in `app/layout.tsx`.
 - `metadata/<route>.ts` — one file per route, each exporting **both** a keyword
   array and a Next.js `Metadata` object (e.g. `aboutKeywords` + `aboutMetadata`).
-- `metadata/shared.ts` — `baseUrl`, `ogImage()`, `baseKeywords`, `dedupe()`.
+- `metadata/shared.ts` — `baseUrl`, `baseKeywords`, `dedupe()`. (Image URLs use
+  the `asset()` helper from `config/site.ts` — see [below](#canonical-urls-and-images).)
 - `metadata/structured-data.ts` — JSON-LD builders (see [Structured data](#structured-data-json-ld)).
 
 A static page sets `export const metadata = <route>Metadata`. A `"use client"`
@@ -74,8 +75,16 @@ and harmless, and the lists double as a content checklist.
 ## Canonical URLs and images
 
 - Every route sets `alternates.canonical` to its absolute URL.
-- OG / Twitter images use the `ogImage()` helper (defaults to `/og-home.jpg`,
-  1200x630). Replace per route by passing a path.
+- OG / Twitter images are served from Cloudflare R2 via the `asset()` helper
+  (`config/site.ts`) — all 1200×630 PNGs under `cdn.gurlivleen.dev/og/`.
+  - Pages pass their own banner: `asset("/og/<route>.png")` (e.g.
+    `asset("/og/about.png")`).
+  - Project detail pages use `` asset(`/og/projects/${slug}.png`) `` — one card
+    per project.
+  - `/og/home.png` is the site default, used by `rootMetadata` and
+    `personSchema`.
+  - There is no longer an `ogImage()` wrapper — `asset()` is the single helper.
+    See [Assets (CDN)](./architecture.md#assets-cloudflare-r2--cdn).
 
 ---
 
@@ -89,7 +98,8 @@ a `<script type="application/ld+json">`). `data` accepts one object or an array.
   `app/layout.tsx`, so it applies site-wide. Its `sameAs` links (GitHub,
   LinkedIn, Twitter) are the strongest signal tying the domain to the name.
 - **`projectSchema(project)`** — a `CreativeWork` per project case study.
-  Emitted in the `/projects/[slug]` server component.
+  Emitted in the `/projects/[slug]` server component; its `image` is the
+  project's own OG card (`asset(\`/og/projects/${project.slug}.png\`)`).
 - **`breadcrumbSchema(crumbs)`** — a `BreadcrumbList` from `{ name, path }[]`
   (the site URL is prefixed automatically). Emitted on `/projects` and
   `/projects/[slug]`.
