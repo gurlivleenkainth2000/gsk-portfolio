@@ -2,9 +2,9 @@
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
+import { baseUrl, baseKeywords, dedupe } from "./shared";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig, asset } from "@/config/site";
 
 export const skillsKeywords: string[] = dedupe(baseKeywords, [
   "Technical Skills",
@@ -45,7 +45,7 @@ export const skillsMetadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: ogImage(),
+        url: asset("/og/skills.png"),
         width: 1200,
         height: 630,
         alt: "Technical Skills — Gurlivleen Singh Kainth",
@@ -60,6 +60,6 @@ export const skillsMetadata: Metadata = {
     title: `Skills | ${siteConfig.name}`,
     description:
       "Languages, frameworks, and tooling — grouped by area, newest at the top of each list.",
-    images: [ogImage()],
+    images: [asset("/og/skills.png")],
   },
 };

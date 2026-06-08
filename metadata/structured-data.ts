@@ -8,7 +8,7 @@
 
 import type { ProjectEntry } from "@/types/project";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig, asset } from "@/config/site";
 
 /** Reusable author/creator reference — the site owner as a Person node. */
 const personRef = {
@@ -23,7 +23,7 @@ export const personSchema = {
   "@type": "Person",
   name: siteConfig.name,
   url: siteConfig.url,
-  image: `${siteConfig.url}/og-home.jpg`,
+  image: asset("/og/home.png"),
   jobTitle: siteConfig.title,
   email: siteConfig.email,
   address: {
@@ -72,7 +72,7 @@ export const projectSchema = (project: ProjectEntry) => ({
   headline: project.subtitle,
   description: project.overview,
   url: `${siteConfig.url}/projects/${project.slug}`,
-  image: `${siteConfig.url}/og-home.jpg`,
+  image: asset(`/og/projects/${project.slug}.png`),
   inLanguage: "en",
   keywords: project.tech.join(", "),
   about: project.domain,

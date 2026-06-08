@@ -5,9 +5,9 @@
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
+import { baseUrl, baseKeywords, dedupe } from "./shared";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig, asset } from "@/config/site";
 
 /** /projects index page. */
 export const projectsKeywords: string[] = dedupe(baseKeywords, [
@@ -87,7 +87,7 @@ export const projectsMetadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: ogImage(),
+        url: asset("/og/projects.png"),
         width: 1200,
         height: 630,
         alt: "Projects — Gurlivleen Singh Kainth",
@@ -102,6 +102,6 @@ export const projectsMetadata: Metadata = {
     title: `Projects | ${siteConfig.name}`,
     description:
       "Architectural ownership across enterprise integration, analytics, SaaS, and Go automation systems.",
-    images: [ogImage()],
+    images: [asset("/og/projects.png")],
   },
 };

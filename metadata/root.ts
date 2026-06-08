@@ -7,7 +7,7 @@
 
 import type { Metadata } from "next";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig, asset } from "@/config/site";
 
 export const homeKeywords: string[] = [
   // Personal identifiers
@@ -202,7 +202,7 @@ export const rootMetadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: `${siteConfig.url}/og-home.jpg`,
+        url: asset("/og/home.png"),
         width: 1200,
         height: 630,
         alt: "Portfolio banner showing Gurlivleen Singh Kainth's software development projects",
@@ -216,7 +216,7 @@ export const rootMetadata: Metadata = {
     creator: siteConfig.twitterHandle,
     title: `${siteConfig.name} | Software Developer Portfolio`,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og-home.jpg`],
+    images: [asset("/og/home.png")],
   },
   alternates: {
     canonical: siteConfig.url,

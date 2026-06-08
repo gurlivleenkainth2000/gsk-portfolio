@@ -2,9 +2,9 @@
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
+import { baseUrl, baseKeywords, dedupe } from "./shared";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig, asset } from "@/config/site";
 
 export const aboutKeywords: string[] = dedupe(baseKeywords, [
   "About Gurlivleen Singh Kainth",
@@ -37,7 +37,7 @@ export const aboutMetadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: ogImage(),
+        url: asset("/og/about.png"),
         width: 1200,
         height: 630,
         alt: "About Gurlivleen Singh Kainth — Backend / Full-Stack Engineer in Melbourne",
@@ -52,6 +52,6 @@ export const aboutMetadata: Metadata = {
     title: `About | ${siteConfig.name}`,
     description:
       "Backend / Full-Stack Engineer based in Melbourne — 4+ years across enterprise integration, analytics, and SaaS.",
-    images: [ogImage()],
+    images: [asset("/og/about.png")],
   },
 };
