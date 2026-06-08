@@ -4,7 +4,7 @@
 // keyword list and its Next.js Metadata object.
 //
 // One file per concern:
-//   - shared.ts        — baseUrl, ogImage, baseKeywords, dedupe
+//   - shared.ts        — baseUrl, baseKeywords, dedupe
 //   - root.ts          — homeKeywords + rootMetadata (site-wide, app/layout.tsx)
 //   - about.ts         — aboutKeywords + aboutMetadata
 //   - contact.ts       — contactKeywords + contactMetadata
@@ -18,7 +18,7 @@
 // app/, not here. Per-project keyword content lives on each ProjectEntry in
 // data/projects.ts and is combined by projectKeywords() above.
 
-export { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
+export { baseUrl, baseKeywords, dedupe } from "./shared";
 export { homeKeywords, rootMetadata } from "./root";
 export { aboutKeywords, aboutMetadata } from "./about";
 export { contactKeywords, contactMetadata } from "./contact";

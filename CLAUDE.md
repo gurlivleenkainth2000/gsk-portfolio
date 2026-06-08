@@ -62,12 +62,12 @@ gsk-portfolio/
 │   ├── explore-card/  projects/  timeline/  # feature component groups
 │   └── linkedin-badge.tsx  # Dynamic-import LinkedIn badge (SSR disabled)
 ├── config/                 # App configuration — tunable settings only
-│   ├── site.ts             # Single source of truth: name, links, nav items
+│   ├── site.ts             # Single source of truth: name, links, nav items, CDN_URL + asset() helper
 │   └── fonts.ts            # Google Font definitions + CSS variables
 ├── data/                   # Domain content records (arrays of entries)
 │   ├── experience.ts  education.ts  projects.ts  skills.ts
 ├── metadata/               # Per-route SEO — keywords + Next.js Metadata, one file per route
-│   ├── shared.ts           # baseUrl, ogImage(), baseKeywords, dedupe()
+│   ├── shared.ts           # baseUrl, baseKeywords, dedupe() (image URLs via asset() from config/site)
 │   ├── root.ts             # homeKeywords + rootMetadata (site-wide defaults)
 │   ├── about.ts  contact.ts  blog.ts  projects.ts  resume.ts  skills.ts  achievements.ts
 │   ├── structured-data.ts  # JSON-LD builders: personSchema, breadcrumbSchema(), projectSchema()
@@ -76,7 +76,7 @@ gsk-portfolio/
 │   ├── index.ts            # Shared utility types (e.g. IconSvgProps)
 │   └── experience.ts  education.ts  project.ts  skills.ts  explore-card.ts  contact.ts
 ├── styles/globals.css      # Tailwind CSS entry point (@import "tailwindcss")
-├── public/                 # Static assets, robots.txt, sitemap.xml
+├── public/                 # Same-origin icons only (favicon, apple-touch-icon); binary assets live on R2 CDN
 ├── apphosting.yaml         # Firebase App Hosting config (runConfig + env)
 ├── firebase.json           # App Hosting backend definition
 ├── .firebaserc             # Default Firebase project alias
@@ -172,6 +172,10 @@ npm run lint      # runs: eslint --fix
 ### Configuration as single source of truth
 - All personal info, navigation links, and social URLs live in `config/site.ts` (`siteConfig`). Do **not** hardcode names, emails, or links in components — import from `siteConfig`.
 - SEO lives in `metadata/` (one file per route, exporting a keyword array + `Metadata`), imported via `@/metadata`. See [docs/seo.md](./docs/seo.md).
+
+### Assets / CDN
+- Binary assets (project images, `resume.pdf`, all OG cards) are served from Cloudflare R2 via `cdn.gurlivleen.dev` — **not** committed to `public/`. Build every asset URL with the `asset(path)` helper + `CDN_URL` from `config/site.ts`; never hardcode a CDN URL. `next.config.js` must whitelist the host in `images.remotePatterns` or remote `next/image` fails.
+- OG images: pages use `asset("/og/<route>.png")`, project pages use ``asset(`/og/projects/${slug}.png`)``. There is **no** `ogImage()` helper — `asset()` is the single helper. `public/` keeps only `favicon.ico` + `apple-touch-icon.png`. Detail: [docs/architecture.md](./docs/architecture.md#assets-cloudflare-r2--cdn).
 
 ### Metadata on client-component pages
 - A `"use client"` page **cannot** export `metadata`; a sibling `layout.tsx` exports it instead (see `app/about/layout.tsx`). The `(about)` group holds `resume` / `skills` / `achievements`. Detail: [docs/routing.md](./docs/routing.md#metadata-on-client-pages).

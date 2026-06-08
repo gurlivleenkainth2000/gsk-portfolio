@@ -29,11 +29,11 @@ Next.js 16 App Router with React Server Components.
 |-----------|------|
 | `app/` | Routes, layouts, the API route, and the `sitemap.ts` / `robots.ts` file-convention routes. See [routing.md](./routing.md). |
 | `components/` | Shared, reusable UI. Feature groups in subfolders (`projects/`, `timeline/`, `explore-card/`). |
-| `config/` | Tunable app settings only — `site.ts` (single source of truth) and `fonts.ts`. |
+| `config/` | Tunable app settings only — `site.ts` (single source of truth, incl. `CDN_URL` + the `asset()` helper) and `fonts.ts`. |
 | `data/` | Domain content records — arrays of entries (experience, education, projects, skills). |
 | `metadata/` | Per-route SEO + JSON-LD builders. See [seo.md](./seo.md). |
 | `types/` | TypeScript interfaces, one file per domain. |
-| `styles/`, `public/` | Global CSS entry, static assets. |
+| `styles/`, `public/` | Global CSS entry; `public/` holds only same-origin icons (`favicon.ico`, `apple-touch-icon.png`). Binary assets live on the CDN — see [Assets (CDN)](#assets-cloudflare-r2--cdn). |
 
 ### config vs data vs metadata — the separation test
 
@@ -47,6 +47,40 @@ The dividing line is: **would this still exist if the design changed?**
 All personal info, navigation links, and social URLs live in `config/site.ts`
 (`siteConfig`). Never hardcode names, emails, or links in components — import
 from `siteConfig`.
+
+---
+
+## Assets (Cloudflare R2 + CDN)
+
+Binary assets — project images, the résumé PDF, and all Open Graph cards — are
+**not** committed to the repo. They live in a Cloudflare R2 bucket
+(`gurlivleen-dev`) and are served over the custom domain `cdn.gurlivleen.dev`,
+which is automatically edge-cached by Cloudflare (R2 has free egress, so there's
+no per-GB delivery cost and no separate CDN product to wire up).
+
+Everything routes through one place: `config/site.ts` exports `CDN_URL` and an
+`asset(path)` helper.
+
+```ts
+export const CDN_URL = "https://cdn.gurlivleen.dev";
+export const asset = (path: string): string =>
+  `${CDN_URL}${path.startsWith("/") ? path : `/${path}`}`;
+```
+
+- **Project images / résumé:** `data/projects.ts` and the resume page build URLs
+  with `asset("/projects/…")` / `asset("/resume.pdf")`.
+- **OG images:** built via `asset()` too — pages use `asset("/og/<route>.png")`,
+  project detail pages use `` asset(`/og/projects/${slug}.png`) ``. See
+  [seo.md](./seo.md#canonical-urls-and-images).
+- **`next/image`:** remote hosts must be whitelisted, so `next.config.js` lists
+  `cdn.gurlivleen.dev` in `images.remotePatterns`. Forgetting this makes remote
+  images fail to render.
+- **Stays local:** `favicon.ico` and `apple-touch-icon.png` remain in `public/`
+  on purpose — tiny, and browsers / SEO expect them same-origin.
+
+To change the CDN host, edit `CDN_URL` in one place. (It's a public, non-secret,
+stable value, so it lives in `config/site.ts` rather than env — keeping all
+tunable non-secret config in one file.)
 
 ---
 

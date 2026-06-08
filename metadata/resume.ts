@@ -2,9 +2,9 @@
 
 import type { Metadata } from "next";
 
-import { baseUrl, ogImage, baseKeywords, dedupe } from "./shared";
+import { baseUrl, baseKeywords, dedupe } from "./shared";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig, asset } from "@/config/site";
 
 export const resumeKeywords: string[] = dedupe(baseKeywords, [
   "Resume",
@@ -35,7 +35,7 @@ export const resumeMetadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: ogImage(),
+        url: asset("/og/resume.png"),
         width: 1200,
         height: 630,
         alt: "Resume — Gurlivleen Singh Kainth",
@@ -50,6 +50,6 @@ export const resumeMetadata: Metadata = {
     title: `Resume | ${siteConfig.name}`,
     description:
       "Download or view the two-page resume — backend / full-stack engineering experience.",
-    images: [ogImage()],
+    images: [asset("/og/resume.png")],
   },
 };
