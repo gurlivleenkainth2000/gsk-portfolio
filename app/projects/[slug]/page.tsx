@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { notFound } from "next/navigation";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig, asset } from "@/config/site";
 import { projects, getProjectBySlug } from "@/data/projects";
 import { projectKeywords, projectSchema, breadcrumbSchema } from "@/metadata";
 import { ProjectDetail } from "@/components/projects/project-detail";
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!project) return {};
 
   const url = `${siteConfig.url}/projects/${slug}`;
-  const ogImage = `${siteConfig.url}/og-home.jpg`;
+  const ogImage = asset(`/og/projects/${slug}.png`);
 
   return {
     title: project.name,
